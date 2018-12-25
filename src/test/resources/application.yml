@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: zuul-ext
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/zuulext_test
+  jpa:
+      hibernate:
+        ddl-auto: create-drop
+      show-sql: false
