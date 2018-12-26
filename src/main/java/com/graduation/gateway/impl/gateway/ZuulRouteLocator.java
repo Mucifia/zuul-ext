@@ -1,4 +1,4 @@
-package com.graduation.gateway.impl.gateway.locator;
+package com.graduation.gateway.impl.gateway;
 
 import com.graduation.gateway.api.model.RouteVO;
 import com.graduation.gateway.impl.service.RouteService;
@@ -29,7 +29,7 @@ public class ZuulRouteLocator extends SimpleRouteLocator implements RefreshableR
 
 
   /**
-   * 覆盖掉了父类的locateRoutes，故zuulProperties配置的不算数了
+   *
    */
   @Override
   protected Map<String, ZuulRoute> locateRoutes() {

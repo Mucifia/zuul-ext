@@ -54,7 +54,7 @@ public class ServicePlanVO{
 
   protected String stateId;
 
-  protected String auth_type;
+  protected String authType;
 
   protected Set<ApiBaseVO> apiBaseVOSet = new HashSet<>();
 
@@ -202,12 +202,12 @@ public class ServicePlanVO{
     this.stateId = stateId;
   }
 
-  public String getAuth_type() {
-    return auth_type;
+  public String getAuthType() {
+    return authType;
   }
 
-  public void setAuth_type(String auth_type) {
-    this.auth_type = auth_type;
+  public void setAuthType(String authType) {
+    this.authType = authType;
   }
 
   @Override
@@ -236,7 +236,7 @@ public class ServicePlanVO{
         Objects.equals(domainId, that.domainId) &&
         Objects.equals(domainCode, that.domainCode) &&
         Objects.equals(stateId, that.stateId) &&
-        Objects.equals(auth_type, that.auth_type) &&
+        Objects.equals(authType, that.authType) &&
         Objects.equals(apiBaseVOSet, that.apiBaseVOSet);
   }
 
@@ -245,6 +245,6 @@ public class ServicePlanVO{
     return Objects
         .hash(servicePlanId, appSysId, name, version, description, status, serviceQualityId,
             isNeedReview, security, imgSrc, enable, commitBy, commitTime, appSysCode, domainId,
-            domainCode, stateId, auth_type, apiBaseVOSet);
+            domainCode, stateId, authType, apiBaseVOSet);
   }
 }

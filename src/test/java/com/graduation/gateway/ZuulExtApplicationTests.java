@@ -146,7 +146,6 @@ public class ZuulExtApplicationTests {
     apiParamPO.setDescription("des");
     apiParamPO.setName("test-case");
     apiParamPO.setParamsType("1");
-    apiParamPO.setRefModelId("1");
     apiParamPO.setRequired(true);
     apiParamPO.setStyle("1");
     apiParamPO.setValue("1");
@@ -181,7 +180,6 @@ public class ZuulExtApplicationTests {
     apiResponsePO = new ApiResponsePO();
     apiResponsePO.setApiResponseDetailId("11");
     apiResponsePO.setDescription("des");
-    apiResponsePO.setRefModelId("!1");
     apiResponsePO.setResponseType("11");
     apiResponsePO.setStatus(1);
     apiResponsePO.setValue("11");

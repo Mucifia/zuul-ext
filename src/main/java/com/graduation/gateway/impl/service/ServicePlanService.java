@@ -43,7 +43,7 @@ public class ServicePlanService {
     servicePlanRepository.save(servicePlanPO);
   }
 
-  public Map<String, ServicePlanVO> getAllServicePlanMap() {
+  public Map<String, ServicePlanVO> getAllServicePlanMapById() {
     List<ServicePlanPO> servicePlanPOS = servicePlanRepository.findAll();
     Map<String,ServicePlanVO> map = new HashMap<>();
     servicePlanPOS.stream().forEach( s->{
