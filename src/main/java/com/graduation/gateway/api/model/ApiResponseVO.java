@@ -110,4 +110,17 @@ public class ApiResponseVO{
         .hash(apiResponseId, apiResponseDetailId, status, responseType, value, description,
             apiResourceDetailId);
   }
+
+  @Override
+  public String toString() {
+    return "ApiResponseVO{" +
+        "apiResponseId='" + apiResponseId + '\'' +
+        ", apiResponseDetailId='" + apiResponseDetailId + '\'' +
+        ", status=" + status +
+        ", responseType='" + responseType + '\'' +
+        ", value='" + value + '\'' +
+        ", description='" + description + '\'' +
+        ", apiResourceDetailId='" + apiResourceDetailId + '\'' +
+        '}';
+  }
 }

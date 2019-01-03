@@ -190,4 +190,24 @@ public class ServiceQualityVO {
             cbErrorPercentage, cbRequestVolumeThreshold, rollingStatsTime, requestLimitQuota,
             requestLimitType, refreshInterval, servicePlanId, routeId);
   }
+
+  @Override
+  public String toString() {
+    return "ServiceQualityVO{" +
+        "serviceQualityId='" + serviceQualityId + '\'' +
+        ", requestLimit='" + requestLimit + '\'' +
+        ", requestTimeout=" + requestTimeout +
+        ", maxConcurrency='" + maxConcurrency + '\'' +
+        ", cbEnable=" + cbEnable +
+        ", cbRecoverTime=" + cbRecoverTime +
+        ", cbErrorPercentage='" + cbErrorPercentage + '\'' +
+        ", cbRequestVolumeThreshold='" + cbRequestVolumeThreshold + '\'' +
+        ", rollingStatsTime=" + rollingStatsTime +
+        ", requestLimitQuota='" + requestLimitQuota + '\'' +
+        ", requestLimitType='" + requestLimitType + '\'' +
+        ", refreshInterval='" + refreshInterval + '\'' +
+        ", servicePlanId='" + servicePlanId + '\'' +
+        ", routeId='" + routeId + '\'' +
+        '}';
+  }
 }

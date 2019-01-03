@@ -183,4 +183,24 @@ public class ApiBaseVO {
         .hash(apiId, name, baseUri, host, version, description, protocal, inboundType, outboundType,
             corsId, security, enable, stateId, servicePlanVOSet);
   }
+
+  @Override
+  public String toString() {
+    return "ApiBaseVO{" +
+        "apiId='" + apiId + '\'' +
+        ", name='" + name + '\'' +
+        ", baseUri='" + baseUri + '\'' +
+        ", host='" + host + '\'' +
+        ", version='" + version + '\'' +
+        ", description='" + description + '\'' +
+        ", protocal='" + protocal + '\'' +
+        ", inboundType='" + inboundType + '\'' +
+        ", outboundType='" + outboundType + '\'' +
+        ", corsId='" + corsId + '\'' +
+        ", security='" + security + '\'' +
+        ", enable=" + enable +
+        ", stateId='" + stateId + '\'' +
+        ", servicePlanVOSet=" + servicePlanVOSet +
+        '}';
+  }
 }

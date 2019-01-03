@@ -5,6 +5,13 @@ import com.graduation.gateway.impl.utils.BeanTransformer;
 import com.graduation.gateway.impl.utils.GatewayImplConstants;
 import com.graduation.gateway.repo.dao.model.ServiceQualityPO;
 import com.graduation.gateway.repo.dao.repository.ServiceQualityRepository;
+import com.graduation.gateway.repo.util.IGatewayConstant;
+import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.properties.RateLimitProperties;
+import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.properties.RateLimitProperties.Policy;
+import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.properties.RateLimitProperties.Policy.MatchType;
+import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.properties.RateLimitProperties.Policy.Type;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,7 +94,51 @@ public class ServiceQualityService {
     serviceQualityRepository.save(BeanTransformer.convert(serviceQualityVO,ServiceQualityPO.class));
   }
 
+  public void delete(ServiceQualityVO serviceQualityVO){
+    ServiceQualityPO serviceQualityPO = BeanTransformer.convert(serviceQualityVO,ServiceQualityPO.class);
+    serviceQualityPO.setDelFlag(GatewayImplConstants.DELETE_FLAG_TRUE);
+    serviceQualityRepository.save(serviceQualityPO);
+  }
 
+  public Policy getRateLimitPolicyByServicePlanId(String servicePlanId){
+    ServiceQualityVO serviceQualityVO = this.getServiceQualityByPlanId(servicePlanId);
+    return getRateLimitPolicy(serviceQualityVO);
 
+  }
+  public Policy getRateLimitPolicyByRouteId(String routeId){
+    ServiceQualityVO serviceQualityVO =  this.getServiceQualityByRouteId(routeId);
+    return getRateLimitPolicy(serviceQualityVO);
+  }
 
+  public Policy getRateLimitPolicy(ServiceQualityVO serviceQualityVO){
+    Policy policy = new Policy();
+    policy.setLimit(Long.valueOf(serviceQualityVO.getRequestLimit()));
+    policy.setQuota(Long.valueOf(serviceQualityVO.getRequestLimitQuota()));
+    policy.setRefreshInterval(Long.valueOf(serviceQualityVO.getRefreshInterval()));
+    String requestLimitType = serviceQualityVO.getRequestLimitType();
+    String[] items = requestLimitType.split(GatewayImplConstants.CONST_COMMA);
+    if (items.length<1){
+      policy.setType(Arrays
+          .asList(new MatchType(RateLimitProperties.Policy.Type.ORIGIN, null),
+              new MatchType(RateLimitProperties.Policy.Type.URL, null),
+              new MatchType(RateLimitProperties.Policy.Type.USER, null)
+          ));
+    }else {
+      List<MatchType> matchTypes = new ArrayList<>();
+      Arrays.stream(items).forEach(s -> {
+        String[] element  = s.split(GatewayImplConstants.CONST_EQUAL);
+        if (element.length==1){
+          matchTypes.add(new MatchType(Type.valueOf(element[0]),null));
+        }else if (element.length==2) {
+          matchTypes.add(new MatchType(Type.valueOf(element[0]), element[1]));
+        }
+      });
+      policy.setType(matchTypes);
+    }
+    return policy;
+  }
+
+  public ServiceQualityVO getServiceQualityByRouteId(String routeId){
+    return BeanTransformer.convert(serviceQualityRepository.findServiceQualityPOByRouteId(routeId),ServiceQualityVO.class);
+  }
 }

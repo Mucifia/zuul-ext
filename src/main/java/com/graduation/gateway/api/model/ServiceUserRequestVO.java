@@ -110,4 +110,17 @@ public class ServiceUserRequestVO{
         .hash(servicePlanUserRequestId, userId, accessScope, status, servicePlanId, servicePlanName,
             servicePlanVersion);
   }
+
+  @Override
+  public String toString() {
+    return "ServiceUserRequestVO{" +
+        "servicePlanUserRequestId='" + servicePlanUserRequestId + '\'' +
+        ", userId='" + userId + '\'' +
+        ", accessScope='" + accessScope + '\'' +
+        ", status='" + status + '\'' +
+        ", servicePlanId='" + servicePlanId + '\'' +
+        ", servicePlanName='" + servicePlanName + '\'' +
+        ", servicePlanVersion='" + servicePlanVersion + '\'' +
+        '}';
+  }
 }

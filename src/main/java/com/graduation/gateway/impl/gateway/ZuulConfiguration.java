@@ -1,6 +1,7 @@
 package com.graduation.gateway.impl.gateway;
 
 import com.graduation.gateway.impl.gateway.ZuulRouteLocator;
+import com.graduation.gateway.impl.gateway.redis.RedisService;
 import com.graduation.gateway.impl.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -23,9 +24,10 @@ public class ZuulConfiguration {
   ServerProperties serverProperties;
 
   @Bean
-  public ZuulRouteLocator zuulRouteLocator(ZuulProperties zuulProperties, RouteService routeService) {
+  public ZuulRouteLocator zuulRouteLocator(ZuulProperties zuulProperties, RouteService routeService,
+      RedisService redisService) {
       return new ZuulRouteLocator(this.serverProperties.getServletPath(), zuulProperties,
-          routeService);
+          routeService,redisService);
   }
 
   @Bean

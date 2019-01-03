@@ -1,4 +1,4 @@
-package com.graduation.gateway.repo.dao.redis;
+package com.graduation.gateway.impl.gateway.redis;
 
 /**
  * @author: mmy

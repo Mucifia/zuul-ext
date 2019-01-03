@@ -107,4 +107,17 @@ public class CorsConfigVO{
   public int hashCode() {
     return Objects.hash(corsId, seq, messageType, style, action, code, value);
   }
+
+  @Override
+  public String toString() {
+    return "CorsConfigVO{" +
+        "corsId='" + corsId + '\'' +
+        ", seq=" + seq +
+        ", messageType='" + messageType + '\'' +
+        ", style='" + style + '\'' +
+        ", action='" + action + '\'' +
+        ", code='" + code + '\'' +
+        ", value='" + value + '\'' +
+        '}';
+  }
 }

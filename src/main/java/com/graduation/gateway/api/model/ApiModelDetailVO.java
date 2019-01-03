@@ -98,4 +98,16 @@ public class ApiModelDetailVO{
   public int hashCode() {
     return Objects.hash(apiModelDetailId, apiModelId, name, modelDetailType, description, requried);
   }
+
+  @Override
+  public String toString() {
+    return "ApiModelDetailVO{" +
+        "apiModelDetailId='" + apiModelDetailId + '\'' +
+        ", apiModelId='" + apiModelId + '\'' +
+        ", name='" + name + '\'' +
+        ", modelDetailType='" + modelDetailType + '\'' +
+        ", description='" + description + '\'' +
+        ", requried=" + requried +
+        '}';
+  }
 }

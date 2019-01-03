@@ -1,4 +1,4 @@
-package com.graduation.gateway.repo.dao.redis;
+package com.graduation.gateway.impl.gateway.redis;
 
 import com.graduation.gateway.api.model.RouteVO;
 import com.graduation.gateway.api.model.ServicePlanVO;
@@ -9,9 +9,6 @@ import com.graduation.gateway.impl.service.ServiceQualityService;
 import com.graduation.gateway.repo.util.IGatewayConstant;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.time.Instant;
-import java.time.OffsetDateTime;
-import java.time.ZoneOffset;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Repository;
 
 
@@ -48,9 +44,6 @@ public class RedisRepository {
 	@Autowired
 	RedisTemplate<String, Object> redisTemplate;
 
-	@Autowired
-	StringRedisTemplate stringRedisTemplate;
-
 	@Value("${server.port}")
 	private String serverPort;
 
@@ -74,8 +67,7 @@ public class RedisRepository {
 
 
 	/**
-	 * gateway节点信息同步
-	 * 若redis中已是最新信息，不予上传到redis
+	 *
 	 * @return
 	 * @throws UnknownHostException
 	 */
@@ -114,7 +106,8 @@ public class RedisRepository {
 	}
 
 	/**
-	 * gateway节点信息初始化并同步
+	 * create Management Stamp
+	 *
 	 * @param manageMap
 	 * @return
 	 * @throws UnknownHostException
@@ -132,7 +125,7 @@ public class RedisRepository {
 	}
 
 	/**
-	 * Copy to Redis if necessary
+	 *
 	 * @throws UnknownHostException
 	 */
 	public synchronized void initializeRedis() throws UnknownHostException {
@@ -147,15 +140,12 @@ public class RedisRepository {
 			Map<String, ServiceQualityVO> serviceQualityMapByRoute = this.serviceQualityService.getAllServiceQMapByRoute();
 			Map<String, ServiceQualityVO> serviceQualityMapByPlan = this.serviceQualityService.getAllServiceQMapByPlan();
 
-			// Begin the transaction to sync the redis repo
-			// redisTemplate.getConnectionFactory().getConnection().openPipeline();
-
 			route.stream().forEach(routeVO -> {
 				redisRouteMap.put(routeVO.getRouteId(), routeVO);
 				ServicePlanVO servicePlanVO = servicePlanMap.get(routeVO.getServicePlanId());
 				if (routeVO.isQualityEnabled()) {
 					ServiceQualityVO serviceQualityVO = serviceQualityMapByRoute.get(routeVO.getRouteId());
-					redisRouteQoSMap.put(routeVO.getRouteId(), serviceQualityVO);
+					redisRouteQoSMap.put(routeVO.getPath(), serviceQualityVO);
 				} else {
 					if (null == servicePlanVO || IGatewayConstant.AUTH_TYPE_API.equals(servicePlanVO.getAuthType())) {
 						ServiceQualityVO serviceQualityVO = serviceQualityMapByPlan.get(routeVO.getServicePlanId());

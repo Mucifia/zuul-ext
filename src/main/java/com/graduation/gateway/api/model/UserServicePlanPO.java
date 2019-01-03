@@ -120,4 +120,18 @@ public class UserServicePlanPO{
         .hash(userServicePlanId, userId, servicePlanId, servicePlanName, servicePlanVersion,
             accessScope, status, clientId);
   }
+
+  @Override
+  public String toString() {
+    return "UserServicePlanPO{" +
+        "userServicePlanId='" + userServicePlanId + '\'' +
+        ", userId='" + userId + '\'' +
+        ", servicePlanId='" + servicePlanId + '\'' +
+        ", servicePlanName='" + servicePlanName + '\'' +
+        ", servicePlanVersion='" + servicePlanVersion + '\'' +
+        ", accessScope='" + accessScope + '\'' +
+        ", status='" + status + '\'' +
+        ", clientId='" + clientId + '\'' +
+        '}';
+  }
 }

@@ -54,4 +54,12 @@ public class ApiModelVO{
   public int hashCode() {
     return Objects.hash(apiModelId, name);
   }
+
+  @Override
+  public String toString() {
+    return "ApiModelVO{" +
+        "apiModelId='" + apiModelId + '\'' +
+        ", name='" + name + '\'' +
+        '}';
+  }
 }

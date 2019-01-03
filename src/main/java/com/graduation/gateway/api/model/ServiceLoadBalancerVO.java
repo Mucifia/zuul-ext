@@ -85,4 +85,15 @@ public class ServiceLoadBalancerVO{
   public int hashCode() {
     return Objects.hash(loadBalancerId, name, className, description, serviceQualityId);
   }
+
+  @Override
+  public String toString() {
+    return "ServiceLoadBalancerVO{" +
+        "loadBalancerId='" + loadBalancerId + '\'' +
+        ", name='" + name + '\'' +
+        ", className='" + className + '\'' +
+        ", description='" + description + '\'' +
+        ", serviceQualityId='" + serviceQualityId + '\'' +
+        '}';
+  }
 }

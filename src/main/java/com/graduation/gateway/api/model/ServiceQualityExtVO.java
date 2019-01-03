@@ -131,4 +131,19 @@ public class ServiceQualityExtVO {
         .hash(serviceQualityExtId, serviceQualityId, displayName, description, extKey, extValue,
             maxValue, minValue, timeUnits);
   }
+
+  @Override
+  public String toString() {
+    return "ServiceQualityExtVO{" +
+        "serviceQualityExtId='" + serviceQualityExtId + '\'' +
+        ", serviceQualityId='" + serviceQualityId + '\'' +
+        ", displayName='" + displayName + '\'' +
+        ", description='" + description + '\'' +
+        ", extKey='" + extKey + '\'' +
+        ", extValue='" + extValue + '\'' +
+        ", maxValue='" + maxValue + '\'' +
+        ", minValue='" + minValue + '\'' +
+        ", timeUnits='" + timeUnits + '\'' +
+        '}';
+  }
 }

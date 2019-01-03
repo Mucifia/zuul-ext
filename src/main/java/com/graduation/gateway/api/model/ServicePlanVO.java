@@ -247,4 +247,29 @@ public class ServicePlanVO{
             isNeedReview, security, imgSrc, enable, commitBy, commitTime, appSysCode, domainId,
             domainCode, stateId, authType, apiBaseVOSet);
   }
+
+  @Override
+  public String toString() {
+    return "ServicePlanVO{" +
+        "servicePlanId='" + servicePlanId + '\'' +
+        ", appSysId='" + appSysId + '\'' +
+        ", name='" + name + '\'' +
+        ", version='" + version + '\'' +
+        ", description='" + description + '\'' +
+        ", status='" + status + '\'' +
+        ", serviceQualityId='" + serviceQualityId + '\'' +
+        ", isNeedReview=" + isNeedReview +
+        ", security='" + security + '\'' +
+        ", imgSrc='" + imgSrc + '\'' +
+        ", enable=" + enable +
+        ", commitBy='" + commitBy + '\'' +
+        ", commitTime=" + commitTime +
+        ", appSysCode='" + appSysCode + '\'' +
+        ", domainId='" + domainId + '\'' +
+        ", domainCode='" + domainCode + '\'' +
+        ", stateId='" + stateId + '\'' +
+        ", authType='" + authType + '\'' +
+        ", apiBaseVOSet=" + apiBaseVOSet +
+        '}';
+  }
 }

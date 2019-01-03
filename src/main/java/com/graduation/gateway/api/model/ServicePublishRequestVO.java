@@ -97,4 +97,16 @@ public class ServicePublishRequestVO{
     return Objects.hash(servicePublishRequestId, servicePlanId, servicePlanName, servicePlanVersion,
         servicePlanStatus, status);
   }
+
+  @Override
+  public String toString() {
+    return "ServicePublishRequestVO{" +
+        "servicePublishRequestId='" + servicePublishRequestId + '\'' +
+        ", servicePlanId='" + servicePlanId + '\'' +
+        ", servicePlanName='" + servicePlanName + '\'' +
+        ", servicePlanVersion='" + servicePlanVersion + '\'' +
+        ", servicePlanStatus='" + servicePlanStatus + '\'' +
+        ", status='" + status + '\'' +
+        '}';
+  }
 }

@@ -97,4 +97,16 @@ public class ApiResourceVO{
   public int hashCode() {
     return Objects.hash(apiResourceId, apiId, pathName, description, targetUri, serviceId);
   }
+
+  @Override
+  public String toString() {
+    return "ApiResourceVO{" +
+        "apiResourceId='" + apiResourceId + '\'' +
+        ", apiId='" + apiId + '\'' +
+        ", pathName='" + pathName + '\'' +
+        ", description='" + description + '\'' +
+        ", targetUri='" + targetUri + '\'' +
+        ", serviceId='" + serviceId + '\'' +
+        '}';
+  }
 }

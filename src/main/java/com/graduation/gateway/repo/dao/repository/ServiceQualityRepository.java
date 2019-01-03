@@ -22,4 +22,5 @@ public interface ServiceQualityRepository extends JpaRepository<ServiceQualityPO
   public List<ServiceQualityPO> findAllByRouteIdAndDelFlag(@Param("ids") List<String> routeIds,
       Pageable pageable);
 
+  public ServiceQualityPO findServiceQualityPOByRouteId(String routeId);
 }

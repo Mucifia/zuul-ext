@@ -131,4 +131,19 @@ public class RouteVO {
         .hash(routeId, path, targetUri, targetServiceId, qualityEnabled, stripPrefix, servicePlanId,
             routeType, preferURL);
   }
+
+  @Override
+  public String toString() {
+    return "RouteVO{" +
+        "routeId='" + routeId + '\'' +
+        ", path='" + path + '\'' +
+        ", targetUri='" + targetUri + '\'' +
+        ", targetServiceId='" + targetServiceId + '\'' +
+        ", qualityEnabled=" + qualityEnabled +
+        ", stripPrefix=" + stripPrefix +
+        ", servicePlanId='" + servicePlanId + '\'' +
+        ", routeType='" + routeType + '\'' +
+        ", preferURL=" + preferURL +
+        '}';
+  }
 }

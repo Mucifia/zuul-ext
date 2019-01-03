@@ -121,4 +121,18 @@ public class ApiParamVO{
         .hash(apiParamId, apiResourceDetailId, name, style, paramsType, value, required,
             description);
   }
+
+  @Override
+  public String toString() {
+    return "ApiParamVO{" +
+        "apiParamId='" + apiParamId + '\'' +
+        ", apiResourceDetailId='" + apiResourceDetailId + '\'' +
+        ", name='" + name + '\'' +
+        ", style='" + style + '\'' +
+        ", paramsType='" + paramsType + '\'' +
+        ", value='" + value + '\'' +
+        ", required=" + required +
+        ", description='" + description + '\'' +
+        '}';
+  }
 }

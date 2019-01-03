@@ -9,4 +9,9 @@ public class GatewayImplConstants {
 
   public static final boolean DELETE_FLAG_TRUE = true;
   public static final String  STATUS_DRAFT = "draft";
+  public static final String CONST_SLASH = "/";
+  public static final String CONST_HYPHEN = "-";
+  public static final String CONST_WILDCARD = "**";
+  public static final String CONST_EQUAL = "=";
+  public static final String CONST_COMMA = ",";
 }

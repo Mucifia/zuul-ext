@@ -211,4 +211,26 @@ public class ApiResourceDetailVO{
             serviceID, url, stripPrefix, perserveHost, retryable, sensitiveHeaders, ignoredHeaders,
             maxAutoRetries, connectionTimeout, readTimeout);
   }
+
+  @Override
+  public String toString() {
+    return "ApiResourceDetailVO{" +
+        "apiResourceDetailId='" + apiResourceDetailId + '\'' +
+        ", apiResourceId='" + apiResourceId + '\'' +
+        ", method='" + method + '\'' +
+        ", operationId='" + operationId + '\'' +
+        ", inboundType='" + inboundType + '\'' +
+        ", outboundType='" + outboundType + '\'' +
+        ", serviceID='" + serviceID + '\'' +
+        ", url='" + url + '\'' +
+        ", stripPrefix=" + stripPrefix +
+        ", perserveHost=" + perserveHost +
+        ", retryable=" + retryable +
+        ", sensitiveHeaders='" + sensitiveHeaders + '\'' +
+        ", ignoredHeaders='" + ignoredHeaders + '\'' +
+        ", maxAutoRetries=" + maxAutoRetries +
+        ", connectionTimeout=" + connectionTimeout +
+        ", readTimeout=" + readTimeout +
+        '}';
+  }
 }

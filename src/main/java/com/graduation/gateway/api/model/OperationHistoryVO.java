@@ -134,4 +134,19 @@ public class OperationHistoryVO {
         .hash(servicePlanHistoryId, operationType, operationBy, operationTime, operationTargetName,
             operationFieldName, operationPk, oldValue, newValue);
   }
+
+  @Override
+  public String toString() {
+    return "OperationHistoryVO{" +
+        "servicePlanHistoryId='" + servicePlanHistoryId + '\'' +
+        ", operationType='" + operationType + '\'' +
+        ", operationBy='" + operationBy + '\'' +
+        ", operationTime=" + operationTime +
+        ", operationTargetName='" + operationTargetName + '\'' +
+        ", operationFieldName='" + operationFieldName + '\'' +
+        ", operationPk='" + operationPk + '\'' +
+        ", oldValue='" + oldValue + '\'' +
+        ", newValue='" + newValue + '\'' +
+        '}';
+  }
 }
