@@ -31,8 +31,6 @@ public class ServiceQualityVO {
 
   protected String cbRequestVolumeThreshold;
 
-  protected int rollingStatsTime;
-
   protected String requestLimitQuota;
 
   protected String requestLimitType;
@@ -109,14 +107,6 @@ public class ServiceQualityVO {
     this.cbEnable = cbEnable;
   }
 
-  public int getRollingStatsTime() {
-    return rollingStatsTime;
-  }
-
-  public void setRollingStatsTime(int rollingStatsTime) {
-    this.rollingStatsTime = rollingStatsTime;
-  }
-
   public String getRequestLimitQuota() {
     return requestLimitQuota;
   }
@@ -169,7 +159,6 @@ public class ServiceQualityVO {
     return requestTimeout == that.requestTimeout &&
         cbEnable == that.cbEnable &&
         cbRecoverTime == that.cbRecoverTime &&
-        rollingStatsTime == that.rollingStatsTime &&
         Objects.equals(serviceQualityId, that.serviceQualityId) &&
         Objects.equals(requestLimit, that.requestLimit) &&
         Objects.equals(maxConcurrency, that.maxConcurrency) &&
@@ -187,7 +176,7 @@ public class ServiceQualityVO {
     return Objects
         .hash(serviceQualityId, requestLimit, requestTimeout, maxConcurrency, cbEnable,
             cbRecoverTime,
-            cbErrorPercentage, cbRequestVolumeThreshold, rollingStatsTime, requestLimitQuota,
+            cbErrorPercentage, cbRequestVolumeThreshold,  requestLimitQuota,
             requestLimitType, refreshInterval, servicePlanId, routeId);
   }
 
@@ -202,7 +191,6 @@ public class ServiceQualityVO {
         ", cbRecoverTime=" + cbRecoverTime +
         ", cbErrorPercentage='" + cbErrorPercentage + '\'' +
         ", cbRequestVolumeThreshold='" + cbRequestVolumeThreshold + '\'' +
-        ", rollingStatsTime=" + rollingStatsTime +
         ", requestLimitQuota='" + requestLimitQuota + '\'' +
         ", requestLimitType='" + requestLimitType + '\'' +
         ", refreshInterval='" + refreshInterval + '\'' +

@@ -77,7 +77,6 @@ public class ApiBaseTest {
     servicePlanVO.setDescription("des");
     servicePlanVO.setName("test-case");
     servicePlanVO.setStatus("!1");
-    servicePlanVO.setAuth_type("11");
     servicePlanVO.setCommitBy("11");
     servicePlanVO.setDomainCode("!1");
     servicePlanVO.setDomainId("11");

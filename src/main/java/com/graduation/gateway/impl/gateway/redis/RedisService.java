@@ -204,7 +204,7 @@ public class RedisService {
           connection.hSet(serializerKey.serialize(IGatewayConstant.MAP_NAME_ROUTE),
               serializerHashKey.serialize(route.getRouteId()), serializerHashValue.serialize(route));
           connection.hSet(serializerKey.serialize(IGatewayConstant.MAP_NAME_QOS),
-              serializerHashKey.serialize(route.getPath()), serializerHashValue.serialize(qos));
+              serializerHashKey.serialize(route.getRouteId()), serializerHashValue.serialize(qos));
         }
         List<Object> lstResults = connection.closePipeline();
         return lstResults.size();
@@ -234,7 +234,7 @@ public class RedisService {
           connection.hDel(serializerKey.serialize(IGatewayConstant.MAP_NAME_ROUTE),
               serializerHashKey.serialize(route.getRouteId()));
           connection.hDel(serializerKey.serialize(IGatewayConstant.MAP_NAME_QOS),
-              serializerHashKey.serialize(route.getPath()));
+              serializerHashKey.serialize(route.getRouteId()));
         }
         List<Object> lstResults = connection.closePipeline();
         return lstResults.size();
@@ -276,7 +276,7 @@ public class RedisService {
       public Object execute(RedisOperations operations) throws DataAccessException {
         operations.multi();
         operations.opsForHash().put(IGatewayConstant.MAP_NAME_ROUTE,routeVO.getRouteId(),routeVO);
-        operations.opsForHash().put(IGatewayConstant.MAP_NAME_QOS,routeVO.getPath(),serviceQualityVO);
+        operations.opsForHash().put(IGatewayConstant.MAP_NAME_QOS,routeVO.getRouteId(),serviceQualityVO);
         return operations.exec();
       }
     };
@@ -292,7 +292,7 @@ public class RedisService {
         RouteVO oldRoute = (RouteVO) operations.opsForHash().get(IGatewayConstant.MAP_NAME_ROUTE,routeVO.getRouteId());
         operations.opsForHash().delete(IGatewayConstant.MAP_NAME_ROUTE,oldRoute.getRouteId());
         operations.opsForHash().put(IGatewayConstant.MAP_NAME_ROUTE,routeVO.getRouteId(),routeVO);
-        operations.opsForHash().put(IGatewayConstant.MAP_NAME_QOS,routeVO.getPath(),serviceQualityVO);
+        operations.opsForHash().put(IGatewayConstant.MAP_NAME_QOS,routeVO.getRouteId(),serviceQualityVO);
         return operations.exec();
       }
     };

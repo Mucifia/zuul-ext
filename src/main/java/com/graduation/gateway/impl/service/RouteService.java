@@ -41,6 +41,9 @@ public class RouteService {
     }).collect(Collectors.toList());
   }
 
+  public RouteVO getRouteByRouteId(String routeId){
+    return BeanTransformer.convert(routeRepository.findOne(routeId),RouteVO.class);
+  }
 
   public void saveSSORoute(RouteVO route){
     routeRepository.save(BeanTransformer.convert(route,RoutePO.class));

@@ -14,4 +14,6 @@ public class GatewayImplConstants {
   public static final String CONST_WILDCARD = "**";
   public static final String CONST_EQUAL = "=";
   public static final String CONST_COMMA = ",";
+  public static final String SERVICEQUALITY = "SERVICE_QUALITY";
+  public static final String SERVERLIST = "SERVER_LIST";
 }

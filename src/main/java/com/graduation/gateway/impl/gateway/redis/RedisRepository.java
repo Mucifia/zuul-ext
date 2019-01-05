@@ -61,8 +61,11 @@ public class RedisRepository {
 		return hashDict.entries(IGatewayConstant.MAP_NAME_QOS);
 	}
 
-	public Object getQoSByRoutePath(String path) {
-		return hashDict.get(IGatewayConstant.MAP_NAME_QOS, path);
+	public Object getQoSByRouteId(String routeId) {
+		return hashDict.get(IGatewayConstant.MAP_NAME_QOS, routeId);
+	}
+	public Object getRouteByRouteId(String routeId) {
+		return hashDict.get(IGatewayConstant.MAP_NAME_ROUTE, routeId);
 	}
 
 
@@ -145,11 +148,11 @@ public class RedisRepository {
 				ServicePlanVO servicePlanVO = servicePlanMap.get(routeVO.getServicePlanId());
 				if (routeVO.isQualityEnabled()) {
 					ServiceQualityVO serviceQualityVO = serviceQualityMapByRoute.get(routeVO.getRouteId());
-					redisRouteQoSMap.put(routeVO.getPath(), serviceQualityVO);
+					redisRouteQoSMap.put(routeVO.getRouteId(), serviceQualityVO);
 				} else {
 					if (null == servicePlanVO || IGatewayConstant.AUTH_TYPE_API.equals(servicePlanVO.getAuthType())) {
 						ServiceQualityVO serviceQualityVO = serviceQualityMapByPlan.get(routeVO.getServicePlanId());
-						redisRouteQoSMap.put(routeVO.getPath(), serviceQualityVO);
+						redisRouteQoSMap.put(routeVO.getRouteId(), serviceQualityVO);
 					}
 				}
 			});

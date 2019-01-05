@@ -44,9 +44,6 @@ public class ServiceQualityPO extends GatewayPO{
   @Column(name = "cb_request_volume_threshold")
   protected String cbRequestVolumeThreshold;
 
-  @Column(name = "rolling_stats_time")
-  protected int rollingStatsTime;
-
   @Column(name = "request_limit_quota")
   protected String requestLimitQuota;
 
@@ -128,13 +125,6 @@ public class ServiceQualityPO extends GatewayPO{
     this.cbEnable = cbEnable;
   }
 
-  public int getRollingStatsTime() {
-    return rollingStatsTime;
-  }
-
-  public void setRollingStatsTime(int rollingStatsTime) {
-    this.rollingStatsTime = rollingStatsTime;
-  }
 
   public String getRequestLimitQuota() {
     return requestLimitQuota;
@@ -188,7 +178,6 @@ public class ServiceQualityPO extends GatewayPO{
     return requestTimeout == that.requestTimeout &&
         cbEnable == that.cbEnable &&
         cbRecoverTime == that.cbRecoverTime &&
-        rollingStatsTime == that.rollingStatsTime &&
         Objects.equals(serviceQualityId, that.serviceQualityId) &&
         Objects.equals(requestLimit, that.requestLimit) &&
         Objects.equals(maxConcurrency, that.maxConcurrency) &&
@@ -207,7 +196,7 @@ public class ServiceQualityPO extends GatewayPO{
     return Objects
         .hash(serviceQualityId, requestLimit, requestTimeout, maxConcurrency, cbEnable,
             cbRecoverTime,
-            cbErrorPercentage, cbRequestVolumeThreshold, rollingStatsTime, requestLimitQuota,
+            cbErrorPercentage, cbRequestVolumeThreshold, requestLimitQuota,
             requestLimitType, refreshInterval, servicePlanId, routeId);
   }
 }

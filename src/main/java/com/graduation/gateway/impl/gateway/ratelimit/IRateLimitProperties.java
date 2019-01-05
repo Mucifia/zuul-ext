@@ -1,5 +1,6 @@
 package com.graduation.gateway.impl.gateway.ratelimit;
 
+import com.graduation.gateway.api.model.RouteVO;
 import com.graduation.gateway.api.model.ServiceQualityVO;
 import com.graduation.gateway.impl.gateway.redis.RedisRepository;
 import com.graduation.gateway.impl.service.ServiceQualityService;
@@ -23,7 +24,8 @@ public class IRateLimitProperties extends RateLimitProperties {
   @Override
   public List<Policy> getPolicies(String key) {
     List<Policy> policies = new ArrayList<>();
-    ServiceQualityVO serviceQualityVO  = (ServiceQualityVO) redisRepository.getQoSByRoutePath(key);
+    RouteVO routeVO = (RouteVO)redisRepository.getRouteByRouteId(key);
+    ServiceQualityVO serviceQualityVO  = (ServiceQualityVO) redisRepository.getRouteByRouteId(routeVO.getRouteId());
     if (Objects.nonNull(serviceQualityVO)){
       Policy policy = covertToPolicy(serviceQualityVO);
       policies.add(policy);

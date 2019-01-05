@@ -270,7 +270,6 @@ public class ZuulExtApplicationTests {
     serviceQualityPO.setRequestLimitQuota("11");
     serviceQualityPO.setRequestLimitType("11");
     serviceQualityPO.setRequestTimeout(11);
-    serviceQualityPO.setRollingStatsTime(11);
 
     //serviceQualityExtPO test-case init;
     serviceQualityExtPO = new ServiceQualityExtPO();
