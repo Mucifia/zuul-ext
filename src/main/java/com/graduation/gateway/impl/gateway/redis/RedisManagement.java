@@ -14,6 +14,17 @@ public class RedisManagement implements Serializable{
   private long beginInitializeTime;
   private long endTime;
 
+  public RedisManagement() {
+  }
+
+  public RedisManagement(String initializerIP, String initializerPort, long beginInitializeTime,
+      long endTime) {
+    this.initializerIP = initializerIP;
+    this.initializerPort = initializerPort;
+    this.beginInitializeTime = beginInitializeTime;
+    this.endTime = endTime;
+  }
+
   public String getInitializerIP() {
     return initializerIP;
   }

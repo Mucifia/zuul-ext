@@ -12,11 +12,9 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.HashOperations;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.stereotype.Repository;
 
 
@@ -41,33 +39,29 @@ public class RedisRepository {
 	@Autowired
 	ServiceQualityService serviceQualityService;
 
-	@Autowired
-	RedisTemplate<String, Object> redisTemplate;
+	ServerProperties serverProperties;
 
-	@Value("${server.port}")
-	private String serverPort;
+	RedisTemplateUtil redisTemplateUtil;
 
-	@Value("${server.context-path}")
-	private String serverPath;
-
-	@Resource(name = "redisTemplate")
-	private HashOperations<String, String, Object> hashDict;
-
-	public Map<String, Object> getAllRoutes() {
-		return hashDict.entries(IGatewayConstant.MAP_NAME_ROUTE);
+	public Map<Object, Object> getAllRoutes() {
+		return redisTemplateUtil.getRouteRedisTemplate().opsForHash().entries(IGatewayConstant.MAP_NAME_ROUTE);
 	}
 
-	public Map<String, Object> getAllQos() {
-		return hashDict.entries(IGatewayConstant.MAP_NAME_QOS);
+	public Map<Object, Object> getAllQos() {
+		return redisTemplateUtil.getSqRedisTemplate().opsForHash().entries(IGatewayConstant.MAP_NAME_QOS);
 	}
 
 	public Object getQoSByRouteId(String routeId) {
-		return hashDict.get(IGatewayConstant.MAP_NAME_QOS, routeId);
+		return redisTemplateUtil.getSqRedisTemplate().opsForHash().get(IGatewayConstant.MAP_NAME_QOS, routeId);
 	}
 	public Object getRouteByRouteId(String routeId) {
-		return hashDict.get(IGatewayConstant.MAP_NAME_ROUTE, routeId);
+		return redisTemplateUtil.getRouteRedisTemplate().opsForHash().get(IGatewayConstant.MAP_NAME_ROUTE, routeId);
 	}
 
+	public RedisRepository(ServerProperties serverProperties, JedisConnectionFactory jedisConnectionFactory) {
+		this.serverProperties = serverProperties;
+		this.redisTemplateUtil = new RedisTemplateUtil(jedisConnectionFactory);
+	}
 
 	/**
 	 *
@@ -76,7 +70,7 @@ public class RedisRepository {
 	 */
 	private boolean beginRedisSync() throws UnknownHostException {
 
-		Map<String, Object> manageMap = hashDict.entries(MAP_NAME_MANAGE);
+		Map<Object, Object> manageMap = redisTemplateUtil.getMngRedisTemplate().opsForHash().entries(MAP_NAME_MANAGE);
 		if (0 == manageMap.size()) {
 			createManagementStamp(manageMap);
 
@@ -115,13 +109,13 @@ public class RedisRepository {
 	 * @return
 	 * @throws UnknownHostException
 	 */
-	private RedisManagement createManagementStamp(Map<String, Object> manageMap) throws UnknownHostException {
+	private RedisManagement createManagementStamp(Map<Object, Object> manageMap) throws UnknownHostException {
 		RedisManagement redisManagement = new RedisManagement();
 		redisManagement.setBeginInitializeTime(System.currentTimeMillis());
 		redisManagement.setInitializerIP(InetAddress.getLocalHost().getHostAddress());
-		redisManagement.setInitializerPort(serverPort);
+		redisManagement.setInitializerPort(String.valueOf(serverProperties.getPort()));
 		manageMap.put(OBJ_NAME_MANAGE, redisManagement);
-		hashDict.putAll(MAP_NAME_MANAGE, manageMap);
+		redisTemplateUtil.getSqRedisTemplate().opsForHash().putAll(MAP_NAME_MANAGE, manageMap);
 
 		return redisManagement;
 
@@ -159,8 +153,8 @@ public class RedisRepository {
 
 			}
 
-			hashDict.putAll(IGatewayConstant.MAP_NAME_ROUTE, redisRouteMap);
-			hashDict.putAll(IGatewayConstant.MAP_NAME_QOS, redisRouteQoSMap);
+		redisTemplateUtil.getRouteRedisTemplate().opsForHash().putAll(IGatewayConstant.MAP_NAME_ROUTE, redisRouteMap);
+		redisTemplateUtil.getSqRedisTemplate().opsForHash().putAll(IGatewayConstant.MAP_NAME_QOS, redisRouteQoSMap);
 			// put local routes map to redis
 
 		}

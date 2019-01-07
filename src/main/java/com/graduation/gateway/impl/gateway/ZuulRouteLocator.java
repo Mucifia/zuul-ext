@@ -53,7 +53,7 @@ public class ZuulRouteLocator extends SimpleRouteLocator implements RefreshableR
 
   private Map<String, ZuulRoute> loadRoutesFromRedis() {
     Map<String, ZuulRoute> map = new LinkedHashMap<>();
-    Map<String, Object> objectMap = redisService.getAllRoutes();
+    Map<Object, Object> objectMap = redisService.getAllRoutes();
     if (Objects.isNull(objectMap) || objectMap.isEmpty()) {
       redisService.initRedis();
       objectMap = redisService.getAllRoutes();

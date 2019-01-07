@@ -8,18 +8,16 @@ import com.graduation.gateway.repo.util.IGatewayConstant;
 import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Map;
-import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
-import org.springframework.data.redis.core.HashOperations;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisOperations;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.SessionCallback;
 import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,25 +32,20 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 public class RedisService {
 
   @Autowired
-  RedisTemplate<String, Object> redisTemplate;
-
-  @Autowired
   RouteService routeService;
 
   @Autowired
   ServiceQualityService serviceQualityService;
 
-  @Autowired
-  DataSourceTransactionManager transactionManager;
+  PlatformTransactionManager transactionManager;
 
   @Autowired
   RedisRepository redisRepository;
 
-  @Resource(name = "redisTemplate")
-  private HashOperations<String, String, Object> hashDict;
+  RedisTemplateUtil redisTemplateUtil;
 
 
-  public Map<String, Object> getAllRoutes(){
+  public Map<Object, Object> getAllRoutes(){
     return redisRepository.getAllRoutes();
   }
 
@@ -64,7 +57,10 @@ public class RedisService {
     }
   }
 
-
+  public RedisService(PlatformTransactionManager transactionManager, JedisConnectionFactory jedisConnectionFactory) {
+    this.transactionManager=transactionManager;
+    this.redisTemplateUtil=new RedisTemplateUtil(jedisConnectionFactory);
+  }
 
 
   /**
@@ -189,20 +185,37 @@ public class RedisService {
    * @return
    */
   public int batchPutRoutes(List<RouteVO> routes, ServiceQualityVO qos) {
-    int result = redisTemplate.execute(new RedisCallback<Integer>() {
+    int result1 = redisTemplateUtil.getRouteRedisTemplate().execute(new RedisCallback<Integer>() {
       @Override
       public Integer doInRedis(RedisConnection connection) throws DataAccessException {
 
-        RedisSerializer<String> serializerKey = redisTemplate.getStringSerializer();
-        RedisSerializer<String> serializerHashKey = (RedisSerializer<String>) redisTemplate
+        RedisSerializer<String> serializerKey = redisTemplateUtil.getRouteRedisTemplate().getStringSerializer();
+        RedisSerializer<String> serializerHashKey = (RedisSerializer<String>) redisTemplateUtil.getRouteRedisTemplate()
             .getHashKeySerializer();
-        RedisSerializer<Object> serializerHashValue = (RedisSerializer<Object>) redisTemplate
+        RedisSerializer<Object> serializerHashValue = (RedisSerializer<Object>) redisTemplateUtil.getRouteRedisTemplate()
             .getHashValueSerializer();
 
         connection.openPipeline();
         for (RouteVO route : routes) {
           connection.hSet(serializerKey.serialize(IGatewayConstant.MAP_NAME_ROUTE),
               serializerHashKey.serialize(route.getRouteId()), serializerHashValue.serialize(route));
+        }
+        List<Object> lstResults = connection.closePipeline();
+        return lstResults.size();
+      }
+    },true);
+    int result2 = redisTemplateUtil.getSqRedisTemplate().execute(new RedisCallback<Integer>() {
+      @Override
+      public Integer doInRedis(RedisConnection connection) throws DataAccessException {
+
+        RedisSerializer<String> serializerKey = redisTemplateUtil.getSqRedisTemplate().getStringSerializer();
+        RedisSerializer<String> serializerHashKey = (RedisSerializer<String>) redisTemplateUtil.getSqRedisTemplate()
+            .getHashKeySerializer();
+        RedisSerializer<Object> serializerHashValue = (RedisSerializer<Object>) redisTemplateUtil.getSqRedisTemplate()
+            .getHashValueSerializer();
+
+        connection.openPipeline();
+        for (RouteVO route : routes) {
           connection.hSet(serializerKey.serialize(IGatewayConstant.MAP_NAME_QOS),
               serializerHashKey.serialize(route.getRouteId()), serializerHashValue.serialize(qos));
         }
@@ -210,7 +223,7 @@ public class RedisService {
         return lstResults.size();
       }
     },true);
-    return result;
+    return result1&result2;
   }
 
   /**
@@ -221,18 +234,33 @@ public class RedisService {
    * @return
    */
   public int batchDeleteRoutes(List<RouteVO> routes, ServiceQualityVO qos) {
-    int result = redisTemplate.execute(new RedisCallback<Integer>() {
+    int result1 = redisTemplateUtil.getRouteRedisTemplate().execute(new RedisCallback<Integer>() {
       @Override
       public Integer doInRedis(RedisConnection connection) throws DataAccessException {
 
-        RedisSerializer<String> serializerKey = redisTemplate.getStringSerializer();
-        RedisSerializer<String> serializerHashKey = (RedisSerializer<String>) redisTemplate
+        RedisSerializer<String> serializerKey = redisTemplateUtil.getRouteRedisTemplate().getStringSerializer();
+        RedisSerializer<String> serializerHashKey = (RedisSerializer<String>) redisTemplateUtil.getRouteRedisTemplate()
             .getHashKeySerializer();
 
         connection.openPipeline();
         for (RouteVO route : routes) {
           connection.hDel(serializerKey.serialize(IGatewayConstant.MAP_NAME_ROUTE),
               serializerHashKey.serialize(route.getRouteId()));
+        }
+        List<Object> lstResults = connection.closePipeline();
+        return lstResults.size();
+      }
+    },true);
+    int result2 = redisTemplateUtil.getSqRedisTemplate().execute(new RedisCallback<Integer>() {
+      @Override
+      public Integer doInRedis(RedisConnection connection) throws DataAccessException {
+
+        RedisSerializer<String> serializerKey = redisTemplateUtil.getSqRedisTemplate().getStringSerializer();
+        RedisSerializer<String> serializerHashKey = (RedisSerializer<String>) redisTemplateUtil.getSqRedisTemplate()
+            .getHashKeySerializer();
+
+        connection.openPipeline();
+        for (RouteVO route : routes) {
           connection.hDel(serializerKey.serialize(IGatewayConstant.MAP_NAME_QOS),
               serializerHashKey.serialize(route.getRouteId()));
         }
@@ -240,27 +268,27 @@ public class RedisService {
         return lstResults.size();
       }
     },true);
-    return result;
+    return result1&result2;
   }
 
   public void putRoute(RouteVO route) {
-    hashDict.put(IGatewayConstant.MAP_NAME_ROUTE,route.getRouteId(),route);
+    redisTemplateUtil.getRouteRedisTemplate().opsForHash().put(IGatewayConstant.MAP_NAME_ROUTE,route.getRouteId(),route);
   }
 
   public Long deleteRoute(String routeId) {
-    return hashDict.delete(IGatewayConstant.MAP_NAME_ROUTE,routeId);
+    return redisTemplateUtil.getRouteRedisTemplate().opsForHash().delete(IGatewayConstant.MAP_NAME_ROUTE,routeId);
   }
 
   public void putQoS(String routePath, ServiceQualityVO serviceQualityVO) {
-    hashDict.put(IGatewayConstant.MAP_NAME_QOS,routePath,serviceQualityVO);
+    redisTemplateUtil.getSqRedisTemplate().opsForHash().put(IGatewayConstant.MAP_NAME_QOS,routePath,serviceQualityVO);
   }
 
   public Long deleteQoS(String routePath) {
-    return hashDict.delete(IGatewayConstant.MAP_NAME_QOS,routePath);
+    return redisTemplateUtil.getSqRedisTemplate().opsForHash().delete(IGatewayConstant.MAP_NAME_QOS,routePath);
   }
 
   public Object getRoute(String routeId) {
-    return hashDict.get(IGatewayConstant.MAP_NAME_ROUTE,routeId);
+    return redisTemplateUtil.getRouteRedisTemplate().opsForHash().get(IGatewayConstant.MAP_NAME_ROUTE,routeId);
   }
 
   /**
@@ -271,46 +299,71 @@ public class RedisService {
   private void saveRedisWithTransaction(RouteVO routeVO, ServiceQualityVO serviceQualityVO) {
 
 
-    SessionCallback sessionCallback = new SessionCallback() {
+    SessionCallback sessionCallback1 = new SessionCallback() {
       @Override
       public Object execute(RedisOperations operations) throws DataAccessException {
         operations.multi();
         operations.opsForHash().put(IGatewayConstant.MAP_NAME_ROUTE,routeVO.getRouteId(),routeVO);
+        return operations.exec();
+      }
+    };
+    redisTemplateUtil.getRouteRedisTemplate().execute(sessionCallback1);
+    SessionCallback sessionCallback2 = new SessionCallback() {
+      @Override
+      public Object execute(RedisOperations operations) throws DataAccessException {
+        operations.multi();
         operations.opsForHash().put(IGatewayConstant.MAP_NAME_QOS,routeVO.getRouteId(),serviceQualityVO);
         return operations.exec();
       }
     };
-    redisTemplate.execute(sessionCallback);
+    redisTemplateUtil.getSqRedisTemplate().execute(sessionCallback2);
+
 
   }
 
   private void updateRedisWithTransaction(RouteVO routeVO, ServiceQualityVO serviceQualityVO) {
-    SessionCallback sessionCallback = new SessionCallback() {
+    SessionCallback sessionCallback1 = new SessionCallback() {
       @Override
       public Object execute(RedisOperations operations) throws DataAccessException {
         operations.multi();
         RouteVO oldRoute = (RouteVO) operations.opsForHash().get(IGatewayConstant.MAP_NAME_ROUTE,routeVO.getRouteId());
         operations.opsForHash().delete(IGatewayConstant.MAP_NAME_ROUTE,oldRoute.getRouteId());
         operations.opsForHash().put(IGatewayConstant.MAP_NAME_ROUTE,routeVO.getRouteId(),routeVO);
+        return operations.exec();
+      }
+    };
+    redisTemplateUtil.getRouteRedisTemplate().execute(sessionCallback1);
+    SessionCallback sessionCallback2 = new SessionCallback() {
+      @Override
+      public Object execute(RedisOperations operations) throws DataAccessException {
+        operations.multi();
         operations.opsForHash().put(IGatewayConstant.MAP_NAME_QOS,routeVO.getRouteId(),serviceQualityVO);
         return operations.exec();
       }
     };
-    redisTemplate.execute(sessionCallback);
+    redisTemplateUtil.getSqRedisTemplate().execute(sessionCallback2);
   }
 
 
   private void deleteRedisWithTransaction(RouteVO routeVO) {
-    SessionCallback sessionCallback = new SessionCallback() {
+    SessionCallback sessionCallback1 = new SessionCallback() {
       @Override
       public Object execute(RedisOperations operations) throws DataAccessException {
         operations.multi();
         operations.opsForHash().delete(IGatewayConstant.MAP_NAME_ROUTE,routeVO.getRouteId());
+        return operations.exec();
+      }
+    };
+    redisTemplateUtil.getRouteRedisTemplate().execute(sessionCallback1);
+    SessionCallback sessionCallback2 = new SessionCallback() {
+      @Override
+      public Object execute(RedisOperations operations) throws DataAccessException {
+        operations.multi();
         operations.opsForHash().delete(IGatewayConstant.MAP_NAME_QOS,routeVO.getRouteId());
         return operations.exec();
       }
     };
-    redisTemplate.execute(sessionCallback);
+    redisTemplateUtil.getSqRedisTemplate().execute(sessionCallback2);
   }
 
 }

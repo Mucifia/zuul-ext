@@ -19,6 +19,14 @@ spring:
       max-idle: 8
       min-idle: 0
       max-wait: 10000
+  data:
+    redis:
+      repositories:
+        enabled: false
 zuul:
   ratelimit:
     enabled: true
+    repository: redis
+eureka:
+  client:
+    enabled: false

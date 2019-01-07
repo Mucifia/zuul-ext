@@ -1,6 +1,7 @@
 package com.graduation.gateway.impl.gateway;
 
 import com.graduation.gateway.impl.gateway.ZuulRouteLocator;
+import com.graduation.gateway.impl.gateway.redis.RedisObjectSerializer;
 import com.graduation.gateway.impl.gateway.redis.RedisService;
 import com.graduation.gateway.impl.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * @author: mmy
@@ -40,7 +43,7 @@ public class ZuulConfiguration {
   public RedisTemplate<String,Object> redisTemplate(JedisConnectionFactory jedisConnectionFactory){
     final RedisTemplate<String,Object> redisTemplate = new RedisTemplate<>();
     redisTemplate.setConnectionFactory(jedisConnectionFactory);
-    redisTemplate.setDefaultSerializer(new GenericToStringSerializer<Object>(Object.class));
+    redisTemplate.afterPropertiesSet();
     return redisTemplate;
   }
 
