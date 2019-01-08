@@ -35,7 +35,6 @@ public class ServicePlanPO  extends GatewayPO{
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   protected String servicePlanId;
 
-
   @Column(name = "name",nullable = false)
   protected String name;
 

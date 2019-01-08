@@ -9,6 +9,8 @@ import com.graduation.gateway.impl.service.ServiceQualityService;
 import com.graduation.gateway.repo.util.IGatewayConstant;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +58,11 @@ public class RedisRepository {
 	}
 	public Object getRouteByRouteId(String routeId) {
 		return redisTemplateUtil.getRouteRedisTemplate().opsForHash().get(IGatewayConstant.MAP_NAME_ROUTE, routeId);
+	}
+	public List<Object> getRouteByRouteId(List<String> routeIds) {
+		List<Object> objects = new ArrayList<>(routeIds);
+		return redisTemplateUtil.getRouteRedisTemplate().opsForHash().multiGet(IGatewayConstant.MAP_NAME_ROUTE,
+				objects);
 	}
 
 	public RedisRepository(ServerProperties serverProperties, JedisConnectionFactory jedisConnectionFactory) {

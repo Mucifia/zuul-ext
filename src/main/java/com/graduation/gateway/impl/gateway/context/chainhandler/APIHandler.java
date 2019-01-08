@@ -14,8 +14,7 @@ public class APIHandler extends AbstractRouteHandler  {
 
     	this.childrenHandlers.add(new APIResourceHandler());
         
-        this.childrenHandlers.add(new RouteBuilderHandler());
-        //this.childrenHandlers.add(new RequestMethodHandler());
+    	this.childrenHandlers.add(new RouteBuilderHandler());
         logger.debug("exit init");
     }
 

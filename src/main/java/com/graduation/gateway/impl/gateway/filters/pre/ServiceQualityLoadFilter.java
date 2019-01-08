@@ -43,14 +43,12 @@ public class ServiceQualityLoadFilter  extends ZuulFilter {
     RequestContext context = RequestContext.getCurrentContext();
     String serviceId = (String) context.get(FilterConstants.SERVICE_ID_KEY);
 
+    //set url
     ServiceQualityVO serviceQualityVO = (ServiceQualityVO) redisRepository.getQoSByRouteId(serviceId);
     RouteVO routeVO = (RouteVO) redisRepository.getRouteByRouteId(serviceId);
-
-
     context.set(GatewayImplConstants.SERVICEQUALITY,serviceQualityVO);
     String serverList = routeVO.getTargetUri();
     context.set(GatewayImplConstants.SERVERLIST,serverList);
-
 
     return null;
   }
