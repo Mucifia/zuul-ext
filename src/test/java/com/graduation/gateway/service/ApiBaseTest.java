@@ -78,8 +78,6 @@ public class ApiBaseTest {
     servicePlanVO.setName("test-case");
     servicePlanVO.setStatus("!1");
     servicePlanVO.setCommitBy("11");
-    servicePlanVO.setDomainCode("!1");
-    servicePlanVO.setDomainId("11");
     servicePlanVO.setEnable(true);
     servicePlanVO.setImgSrc("!1");
     servicePlanVO.setNeedReview(true);

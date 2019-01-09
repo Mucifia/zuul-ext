@@ -22,8 +22,6 @@ public class ServicePlanVO{
 
   protected String servicePlanId;
 
-  protected String appSysId;
-
   protected String name;
 
   protected String version;
@@ -34,7 +32,7 @@ public class ServicePlanVO{
 
   protected String serviceQualityId;
 
-  protected boolean isNeedReview;
+  protected boolean NeedReview;
 
   protected String security;
 
@@ -45,12 +43,6 @@ public class ServicePlanVO{
   protected String commitBy;
 
   protected Date commitTime;
-
-  protected String appSysCode;
-
-  protected String domainId;
-
-  protected String domainCode;
 
   protected String stateId;
 
@@ -72,14 +64,6 @@ public class ServicePlanVO{
 
   public void setServicePlanId(String servicePlanId) {
     this.servicePlanId = servicePlanId;
-  }
-
-  public String getAppSysId() {
-    return appSysId;
-  }
-
-  public void setAppSysId(String appSysId) {
-    this.appSysId = appSysId;
   }
 
   public String getName() {
@@ -123,11 +107,11 @@ public class ServicePlanVO{
   }
 
   public boolean isNeedReview() {
-    return isNeedReview;
+    return NeedReview;
   }
 
   public void setNeedReview(boolean needReview) {
-    isNeedReview = needReview;
+    NeedReview = needReview;
   }
 
   public String getSecurity() {
@@ -170,30 +154,6 @@ public class ServicePlanVO{
     this.commitTime = commitTime;
   }
 
-  public String getAppSysCode() {
-    return appSysCode;
-  }
-
-  public void setAppSysCode(String appSysCode) {
-    this.appSysCode = appSysCode;
-  }
-
-  public String getDomainId() {
-    return domainId;
-  }
-
-  public void setDomainId(String domainId) {
-    this.domainId = domainId;
-  }
-
-  public String getDomainCode() {
-    return domainCode;
-  }
-
-  public void setDomainCode(String domainCode) {
-    this.domainCode = domainCode;
-  }
-
   public String getStateId() {
     return stateId;
   }
@@ -219,10 +179,9 @@ public class ServicePlanVO{
       return false;
     }
     ServicePlanVO that = (ServicePlanVO) o;
-    return isNeedReview == that.isNeedReview &&
+    return NeedReview == that.NeedReview &&
         enable == that.enable &&
         Objects.equals(servicePlanId, that.servicePlanId) &&
-        Objects.equals(appSysId, that.appSysId) &&
         Objects.equals(name, that.name) &&
         Objects.equals(version, that.version) &&
         Objects.equals(description, that.description) &&
@@ -232,9 +191,6 @@ public class ServicePlanVO{
         Objects.equals(imgSrc, that.imgSrc) &&
         Objects.equals(commitBy, that.commitBy) &&
         Objects.equals(commitTime, that.commitTime) &&
-        Objects.equals(appSysCode, that.appSysCode) &&
-        Objects.equals(domainId, that.domainId) &&
-        Objects.equals(domainCode, that.domainCode) &&
         Objects.equals(stateId, that.stateId) &&
         Objects.equals(authType, that.authType) &&
         Objects.equals(apiBaseVOSet, that.apiBaseVOSet);
@@ -243,30 +199,26 @@ public class ServicePlanVO{
   @Override
   public int hashCode() {
     return Objects
-        .hash(servicePlanId, appSysId, name, version, description, status, serviceQualityId,
-            isNeedReview, security, imgSrc, enable, commitBy, commitTime, appSysCode, domainId,
-            domainCode, stateId, authType, apiBaseVOSet);
+        .hash(servicePlanId, name, version, description, status, serviceQualityId,
+            NeedReview, security, imgSrc, enable, commitBy, commitTime, stateId, authType,
+            apiBaseVOSet);
   }
 
   @Override
   public String toString() {
     return "ServicePlanVO{" +
         "servicePlanId='" + servicePlanId + '\'' +
-        ", appSysId='" + appSysId + '\'' +
         ", name='" + name + '\'' +
         ", version='" + version + '\'' +
         ", description='" + description + '\'' +
         ", status='" + status + '\'' +
         ", serviceQualityId='" + serviceQualityId + '\'' +
-        ", isNeedReview=" + isNeedReview +
+        ", NeedReview=" + NeedReview +
         ", security='" + security + '\'' +
         ", imgSrc='" + imgSrc + '\'' +
         ", enable=" + enable +
         ", commitBy='" + commitBy + '\'' +
         ", commitTime=" + commitTime +
-        ", appSysCode='" + appSysCode + '\'' +
-        ", domainId='" + domainId + '\'' +
-        ", domainCode='" + domainCode + '\'' +
         ", stateId='" + stateId + '\'' +
         ", authType='" + authType + '\'' +
         ", apiBaseVOSet=" + apiBaseVOSet +

@@ -1,9 +1,7 @@
 package com.graduation.gateway.impl.gateway.ratelimit;
 
-import com.graduation.gateway.impl.gateway.redis.RedisRepository;
 import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.properties.RateLimitProperties.Repository;
 import java.lang.reflect.Type;
-import javax.persistence.Table;
 
 /**
  *

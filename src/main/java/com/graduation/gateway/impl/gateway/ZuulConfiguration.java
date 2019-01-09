@@ -1,6 +1,5 @@
 package com.graduation.gateway.impl.gateway;
 
-import com.graduation.gateway.api.model.RouteVO;
 import com.graduation.gateway.impl.gateway.filters.pre.BlackWhiteListFilter;
 import com.graduation.gateway.impl.gateway.filters.pre.ServiceQualityLoadFilter;
 import com.graduation.gateway.impl.gateway.filters.route.ServiceQualitySetFilter;
@@ -12,18 +11,20 @@ import com.graduation.gateway.impl.service.RouteService;
 import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.RateLimitAutoConfiguration;
 import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.properties.RateLimitProperties;
 import com.marcosbarbero.cloud.autoconfigure.zuul.ratelimit.config.properties.RateLimitProperties.Policy;
-import java.util.Collection;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 /**
  * @author: mmy
@@ -65,7 +66,9 @@ public class ZuulConfiguration {
   }
 
 
-
+  /**
+   * 限流策略初始化
+   */
   @Configuration
   @AutoConfigureAfter(RateLimitAutoConfiguration.class)
   public class RateLimitPropertiesSetter{
@@ -90,7 +93,25 @@ public class ZuulConfiguration {
         rateLimitProperties.getPolicies().putAll(policies);
       }
     }
-
-
 }
+
+
+  /**
+   * 默认先允许所有的路径跨域访问
+   * @return
+   */
+  @Bean
+  public FilterRegistrationBean corsFilter() {
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    CorsConfiguration config = new CorsConfiguration();
+    config.setAllowCredentials(true);
+    config.addAllowedOrigin("*");
+    config.addAllowedHeader(CorsConfiguration.ALL);
+    config.addAllowedMethod(CorsConfiguration.ALL);
+    source.registerCorsConfiguration("/**", config);
+    FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+    bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+    return bean;
+  }
+
 }

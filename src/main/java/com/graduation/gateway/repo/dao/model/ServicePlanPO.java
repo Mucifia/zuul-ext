@@ -1,23 +1,13 @@
 package com.graduation.gateway.repo.dao.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -27,7 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 @Entity
 @Table(name = "zuul_service_plan")
-public class ServicePlanPO  extends GatewayPO{
+public class ServicePlanPO extends GatewayPO {
 
   @Id
   @Column(name = "service_plan_id")
@@ -35,7 +25,7 @@ public class ServicePlanPO  extends GatewayPO{
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   protected String servicePlanId;
 
-  @Column(name = "name",nullable = false)
+  @Column(name = "name", nullable = false)
   protected String name;
 
   @Column(name = "version")
@@ -68,14 +58,6 @@ public class ServicePlanPO  extends GatewayPO{
   @Column(name = "commit_time")
   @DateTimeFormat(pattern = "yyyy-MM-dd:HH:mm:ss")
   protected Date commitTime;
-
-
-
-  @Column(name = "domain_id")
-  protected String domainId;
-
-  @Column(name = "domain_code")
-  protected String domainCode;
 
   @Column(name = "state_id")
   protected String stateId;
@@ -182,22 +164,6 @@ public class ServicePlanPO  extends GatewayPO{
   }
 
 
-  public String getDomainId() {
-    return domainId;
-  }
-
-  public void setDomainId(String domainId) {
-    this.domainId = domainId;
-  }
-
-  public String getDomainCode() {
-    return domainCode;
-  }
-
-  public void setDomainCode(String domainCode) {
-    this.domainCode = domainCode;
-  }
-
   public String getStateId() {
     return stateId;
   }
@@ -238,8 +204,6 @@ public class ServicePlanPO  extends GatewayPO{
         Objects.equals(imgSrc, that.imgSrc) &&
         Objects.equals(commitBy, that.commitBy) &&
         Objects.equals(commitTime, that.commitTime) &&
-        Objects.equals(domainId, that.domainId) &&
-        Objects.equals(domainCode, that.domainCode) &&
         Objects.equals(stateId, that.stateId) &&
         Objects.equals(auth_type, that.auth_type);
   }
@@ -248,7 +212,7 @@ public class ServicePlanPO  extends GatewayPO{
   public int hashCode() {
     return Objects
         .hash(super.hashCode(), servicePlanId, name, version, description, status, serviceQualityId,
-            isNeedReview, security, imgSrc, enable, commitBy, commitTime, domainId, domainCode,
+            isNeedReview, security, imgSrc, enable, commitBy, commitTime,
             stateId, auth_type);
   }
 }

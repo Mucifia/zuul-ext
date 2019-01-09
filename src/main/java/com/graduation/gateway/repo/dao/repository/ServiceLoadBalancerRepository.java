@@ -1,5 +1,6 @@
 package com.graduation.gateway.repo.dao.repository;
 
+import com.graduation.gateway.api.model.ServiceLoadBalancerVO;
 import com.graduation.gateway.repo.dao.model.ServiceLoadBalancerPO;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,4 +12,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ServiceLoadBalancerRepository extends JpaRepository<ServiceLoadBalancerPO,String> {
 
   public ServiceLoadBalancerPO findServiceLoadBalancerPOByName(String name);
+
+  public ServiceLoadBalancerPO findServiceLoadBalancerPOByServiceQualityId(String serviceQualityId);
 }

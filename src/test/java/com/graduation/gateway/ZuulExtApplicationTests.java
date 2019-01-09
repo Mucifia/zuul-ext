@@ -1,8 +1,6 @@
 package com.graduation.gateway;
 
 import com.graduation.gateway.repo.dao.model.ApiBasePO;
-import com.graduation.gateway.repo.dao.model.ApiModelDetailPO;
-import com.graduation.gateway.repo.dao.model.ApiModelPO;
 import com.graduation.gateway.repo.dao.model.ApiParamPO;
 import com.graduation.gateway.repo.dao.model.ApiResourceDetailPO;
 import com.graduation.gateway.repo.dao.model.ApiResourcePO;
@@ -19,8 +17,6 @@ import com.graduation.gateway.repo.dao.model.ServiceQualityPO;
 import com.graduation.gateway.repo.dao.model.ServiceUserRequestPO;
 import com.graduation.gateway.repo.dao.model.UserServicePlanPO;
 import com.graduation.gateway.repo.dao.repository.ApiBaseRepository;
-import com.graduation.gateway.repo.dao.repository.ApiModelDetailRepository;
-import com.graduation.gateway.repo.dao.repository.ApiModelRepository;
 import com.graduation.gateway.repo.dao.repository.ApiParamRepository;
 import com.graduation.gateway.repo.dao.repository.ApiResourceDetailRepository;
 import com.graduation.gateway.repo.dao.repository.ApiResourceRepository;
@@ -36,7 +32,6 @@ import com.graduation.gateway.repo.dao.repository.ServiceQualityExtRepository;
 import com.graduation.gateway.repo.dao.repository.ServiceQualityRepository;
 import com.graduation.gateway.repo.dao.repository.ServiceUserRequestRepository;
 import com.graduation.gateway.repo.dao.repository.UserServicePlanRepository;
-import java.util.Set;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -54,10 +49,6 @@ public class ZuulExtApplicationTests {
 
   @Autowired
   ApiBaseRepository apiBaseRepository;
-  @Autowired
-  ApiModelDetailRepository apiModelDetailRepository;
-  @Autowired
-  ApiModelRepository apiModelRepository;
   @Autowired
   ApiParamRepository apiParamRepository;
   @Autowired
@@ -91,8 +82,6 @@ public class ZuulExtApplicationTests {
 
 
   private static ApiBasePO apiBasePO;
-  private static ApiModelDetailPO apiModelDetailPO;
-  private static ApiModelPO apiModelPO;
   private static ApiParamPO apiParamPO;
   private static ApiResourceDetailPO apiResourceDetailPO;
   private static ApiResourcePO apiResourcePO;
@@ -127,18 +116,6 @@ public class ZuulExtApplicationTests {
     apiBasePO.setStateId("s");
     apiBasePO.setVersion("1");
 
-    //apiModelDetail test-case init
-    apiModelDetailPO = new ApiModelDetailPO();
-    apiModelDetailPO.setApiModelId("1");
-    apiModelDetailPO.setDescription("des");
-    apiModelDetailPO.setModelDetailType("1");
-    apiModelDetailPO.setName("test-case");
-    apiModelDetailPO.setRefModelId("1");
-    apiModelDetailPO.setRequried(true);
-
-    //apiModelPO test-case init
-    apiModelPO = new ApiModelPO();
-    apiModelPO.setName("test-case");
 
     //apiParamPO test-case init
     apiParamPO = new ApiParamPO();
@@ -239,8 +216,6 @@ public class ZuulExtApplicationTests {
     servicePlanPO.setStatus("!1");
     servicePlanPO.setAuth_type("11");
     servicePlanPO.setCommitBy("11");
-    servicePlanPO.setDomainCode("!1");
-    servicePlanPO.setDomainId("11");
     servicePlanPO.setEnable(true);
     servicePlanPO.setImgSrc("!1");
     servicePlanPO.setNeedReview(true);
@@ -314,28 +289,6 @@ public class ZuulExtApplicationTests {
     Assert.assertTrue(apiBase.isDelFlag());
   }
 
-  @Test
-  public void ApiModelDetailTest() {
-    apiModelDetailRepository.save(apiModelDetailPO);
-    ApiModelDetailPO apiModelDetail = apiModelDetailRepository
-        .findApiModelDetailPoByName("test-case");
-    Assert.assertEquals(apiModelDetail.getDescription(), "des");
-    apiModelDetailPO.setDelFlag(true);
-    apiModelDetailRepository.save(apiModelDetailPO);
-    apiModelDetail = apiModelDetailRepository.findApiModelDetailPoByName("test-case");
-    Assert.assertTrue(apiModelDetail.isDelFlag());
-  }
-
-  @Test
-  public void ApiModelTest() {
-    apiModelRepository.save(apiModelPO);
-    ApiModelPO apimodel = apiModelRepository.findApiModelPOByName("test-case");
-    Assert.assertFalse(apimodel.isDelFlag());
-    apiModelPO.setDelFlag(true);
-    apiModelRepository.save(apiModelPO);
-    apimodel = apiModelRepository.findApiModelPOByName("test-case");
-    Assert.assertTrue(apimodel.isDelFlag());
-  }
 
   @Test
   public void ApiParamTest() {
