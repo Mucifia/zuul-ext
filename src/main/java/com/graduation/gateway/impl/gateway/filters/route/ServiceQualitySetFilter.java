@@ -45,13 +45,13 @@ public class ServiceQualitySetFilter extends ZuulFilter implements ApplicationCo
   public Object run() {
     RequestContext context = RequestContext.getCurrentContext();
     ServiceQualityVO serviceQualityVO = (ServiceQualityVO) context
-        .get(GatewayImplConstants.SERVICEQUALITY);
+        .get(GatewayImplConstants.SERVICE_QUALITY);
 
     SpringClientFactory springClientFactory = applicationContext.getBean(SpringClientFactory.class);
 
     //ribbon server list (don't use eureka)
-    springClientFactory.getClientConfig(GatewayImplConstants.SERVICEQUALITY).set(
-        CommonClientConfigKey.ListOfServers, (String) context.get(GatewayImplConstants.SERVERLIST));
+    springClientFactory.getClientConfig(GatewayImplConstants.SERVICE_QUALITY).set(
+        CommonClientConfigKey.ListOfServers, (String) context.get(GatewayImplConstants.SERVER_LIST));
 
     //hystrix properties config
 
