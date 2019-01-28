@@ -18,8 +18,6 @@ public class ApiResponseVO{
 
   protected String apiResponseId;
 
-  protected String apiResponseDetailId;
-
   protected int status;
 
   protected String responseType;
@@ -38,13 +36,6 @@ public class ApiResponseVO{
     this.apiResponseId = apiResponseId;
   }
 
-  public String getApiResponseDetailId() {
-    return apiResponseDetailId;
-  }
-
-  public void setApiResponseDetailId(String apiResponseDetailId) {
-    this.apiResponseDetailId = apiResponseDetailId;
-  }
 
   public int getStatus() {
     return status;
@@ -97,7 +88,6 @@ public class ApiResponseVO{
     ApiResponseVO that = (ApiResponseVO) o;
     return status == that.status &&
         Objects.equals(apiResponseId, that.apiResponseId) &&
-        Objects.equals(apiResponseDetailId, that.apiResponseDetailId) &&
         Objects.equals(responseType, that.responseType) &&
         Objects.equals(value, that.value) &&
         Objects.equals(description, that.description) &&
@@ -107,7 +97,7 @@ public class ApiResponseVO{
   @Override
   public int hashCode() {
     return Objects
-        .hash(apiResponseId, apiResponseDetailId, status, responseType, value, description,
+        .hash(apiResponseId, status, responseType, value, description,
             apiResourceDetailId);
   }
 
@@ -115,7 +105,6 @@ public class ApiResponseVO{
   public String toString() {
     return "ApiResponseVO{" +
         "apiResponseId='" + apiResponseId + '\'' +
-        ", apiResponseDetailId='" + apiResponseDetailId + '\'' +
         ", status=" + status +
         ", responseType='" + responseType + '\'' +
         ", value='" + value + '\'' +

@@ -1,5 +1,6 @@
 package com.graduation.gateway.api.model;
 
+
 import java.util.Objects;
 
 /**
@@ -9,21 +10,20 @@ import java.util.Objects;
  */
 public class ApiTransformVO{
 
+
   protected String apiTransformId;
 
   protected String apiResourceDetailId;
 
-  protected int seq;
+  protected String name;
 
-  protected String messageType;
+  protected String paramLocation;
 
-  protected String style;
+  protected String incomeParamName;
 
-  protected String action;
+  protected String incomeParamLocation;
 
-  protected String code;
-
-  protected String value;
+  protected String type;
 
   public String getApiTransformId() {
     return apiTransformId;
@@ -41,52 +41,57 @@ public class ApiTransformVO{
     this.apiResourceDetailId = apiResourceDetailId;
   }
 
-  public int getSeq() {
-    return seq;
+  public String getName() {
+    return name;
   }
 
-  public void setSeq(int seq) {
-    this.seq = seq;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public String getMessageType() {
-    return messageType;
+  public String getParamLocation() {
+    return paramLocation;
   }
 
-  public void setMessageType(String messageType) {
-    this.messageType = messageType;
+  public void setParamLocation(String paramLocation) {
+    this.paramLocation = paramLocation;
   }
 
-  public String getStyle() {
-    return style;
+  public String getIncomeParamName() {
+    return incomeParamName;
   }
 
-  public void setStyle(String style) {
-    this.style = style;
+  public void setIncomeParamName(String incomeParamName) {
+    this.incomeParamName = incomeParamName;
   }
 
-  public String getAction() {
-    return action;
+  public String getIncomeParamLocation() {
+    return incomeParamLocation;
   }
 
-  public void setAction(String action) {
-    this.action = action;
+  public void setIncomeParamLocation(String incomeParamLocation) {
+    this.incomeParamLocation = incomeParamLocation;
   }
 
-  public String getCode() {
-    return code;
+  public String getType() {
+    return type;
   }
 
-  public void setCode(String code) {
-    this.code = code;
+  public void setType(String type) {
+    this.type = type;
   }
 
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
+  @Override
+  public String toString() {
+    return "ApiTransformVO{" +
+        "apiTransformId='" + apiTransformId + '\'' +
+        ", apiResourceDetailId='" + apiResourceDetailId + '\'' +
+        ", name='" + name + '\'' +
+        ", paramLocation='" + paramLocation + '\'' +
+        ", incomeParamName='" + incomeParamName + '\'' +
+        ", incomeParamLocation='" + incomeParamLocation + '\'' +
+        ", type='" + type + '\'' +
+        '}';
   }
 
   @Override
@@ -98,33 +103,18 @@ public class ApiTransformVO{
       return false;
     }
     ApiTransformVO that = (ApiTransformVO) o;
-    return seq == that.seq &&
-        Objects.equals(apiTransformId, that.apiTransformId) &&
+    return Objects.equals(apiTransformId, that.apiTransformId) &&
         Objects.equals(apiResourceDetailId, that.apiResourceDetailId) &&
-        Objects.equals(messageType, that.messageType) &&
-        Objects.equals(style, that.style) &&
-        Objects.equals(action, that.action) &&
-        Objects.equals(code, that.code) &&
-        Objects.equals(value, that.value);
+        Objects.equals(name, that.name) &&
+        Objects.equals(paramLocation, that.paramLocation) &&
+        Objects.equals(incomeParamName, that.incomeParamName) &&
+        Objects.equals(incomeParamLocation, that.incomeParamLocation) &&
+        Objects.equals(type, that.type);
   }
 
   @Override
   public int hashCode() {
-    return Objects
-        .hash(apiTransformId, apiResourceDetailId, seq, messageType, style, action, code, value);
-  }
-
-  @Override
-  public String toString() {
-    return "ApiTransformVO{" +
-        "apiTransformId='" + apiTransformId + '\'' +
-        ", apiResourceDetailId='" + apiResourceDetailId + '\'' +
-        ", seq=" + seq +
-        ", messageType='" + messageType + '\'' +
-        ", style='" + style + '\'' +
-        ", action='" + action + '\'' +
-        ", code='" + code + '\'' +
-        ", value='" + value + '\'' +
-        '}';
+    return Objects.hash(apiTransformId, apiResourceDetailId, name, paramLocation, incomeParamName,
+        incomeParamLocation, type);
   }
 }

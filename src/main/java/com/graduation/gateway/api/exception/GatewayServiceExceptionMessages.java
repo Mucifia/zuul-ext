@@ -1,4 +1,4 @@
-package com.graduation.gateway.api.util;
+package com.graduation.gateway.api.exception;
 
 /**
  * @author: mmy

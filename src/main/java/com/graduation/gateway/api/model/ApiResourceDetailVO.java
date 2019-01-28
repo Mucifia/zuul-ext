@@ -1,5 +1,6 @@
 package com.graduation.gateway.api.model;
 
+import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,37 +18,38 @@ import org.hibernate.annotations.GenericGenerator;
 public class ApiResourceDetailVO{
 
 
-  protected String apiResourceDetailId;
+  private String apiResourceDetailId;
 
-  protected String apiResourceId;
+  private String apiResourceId;
 
-  protected String method;
+  private String method;
 
-  protected String operationId;
+  private String bprotocal;
 
-  protected String inboundType;
+  private String bmethod;
 
-  protected String outboundType;
+  private boolean stripPrefix;
 
-  protected String serviceID;
+  private boolean perserveHost;
 
-  protected String url;
+  private boolean retryable;
 
-  protected boolean stripPrefix;
+  private String sensitiveHeaders;
 
-  protected boolean perserveHost;
+  private String ignoredHeaders;
 
-  protected boolean retryable;
+  private int maxAutoRetries;
 
-  protected String sensitiveHeaders;
+  private int connectionTimeout;
 
-  protected String ignoredHeaders;
+  private int readTimeout;
 
-  protected int maxAutoRetries;
+  private List<ApiParamVO> apiParamVOS;
 
-  protected int connectionTimeout;
+  private List<ApiTransformVO> apiTransformVOS;
 
-  protected int readTimeout;
+  private List<ApiResponseVO> apiResponseVOS;
+
 
   public String getApiResourceDetailId() {
     return apiResourceDetailId;
@@ -71,46 +73,6 @@ public class ApiResourceDetailVO{
 
   public void setMethod(String method) {
     this.method = method;
-  }
-
-  public String getOperationId() {
-    return operationId;
-  }
-
-  public void setOperationId(String operationId) {
-    this.operationId = operationId;
-  }
-
-  public String getInboundType() {
-    return inboundType;
-  }
-
-  public void setInboundType(String inboundType) {
-    this.inboundType = inboundType;
-  }
-
-  public String getOutboundType() {
-    return outboundType;
-  }
-
-  public void setOutboundType(String outboundType) {
-    this.outboundType = outboundType;
-  }
-
-  public String getServiceID() {
-    return serviceID;
-  }
-
-  public void setServiceID(String serviceID) {
-    this.serviceID = serviceID;
-  }
-
-  public String getUrl() {
-    return url;
-  }
-
-  public void setUrl(String url) {
-    this.url = url;
   }
 
   public boolean isStripPrefix() {
@@ -177,6 +139,48 @@ public class ApiResourceDetailVO{
     this.readTimeout = readTimeout;
   }
 
+  public String getBprotocal() {
+    return bprotocal;
+  }
+
+  public void setBprotocal(String bprotocal) {
+    this.bprotocal = bprotocal;
+  }
+
+  public List<ApiParamVO> getApiParamVOS() {
+    return apiParamVOS;
+  }
+
+  public void setApiParamVOS(List<ApiParamVO> apiParamVOS) {
+    this.apiParamVOS = apiParamVOS;
+  }
+
+  public List<ApiTransformVO> getApiTransformVOS() {
+    return apiTransformVOS;
+  }
+
+  public void setApiTransformVOS(
+      List<ApiTransformVO> apiTransformVOS) {
+    this.apiTransformVOS = apiTransformVOS;
+  }
+
+  public List<ApiResponseVO> getApiResponseVOS() {
+    return apiResponseVOS;
+  }
+
+  public void setApiResponseVOS(
+      List<ApiResponseVO> apiResponseVOS) {
+    this.apiResponseVOS = apiResponseVOS;
+  }
+
+  public String getBmethod() {
+    return bmethod;
+  }
+
+  public void setBmethod(String bmethod) {
+    this.bmethod = bmethod;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -195,21 +199,21 @@ public class ApiResourceDetailVO{
         Objects.equals(apiResourceDetailId, that.apiResourceDetailId) &&
         Objects.equals(apiResourceId, that.apiResourceId) &&
         Objects.equals(method, that.method) &&
-        Objects.equals(operationId, that.operationId) &&
-        Objects.equals(inboundType, that.inboundType) &&
-        Objects.equals(outboundType, that.outboundType) &&
-        Objects.equals(serviceID, that.serviceID) &&
-        Objects.equals(url, that.url) &&
+        Objects.equals(bprotocal, that.bprotocal) &&
+        Objects.equals(bmethod, that.bmethod) &&
         Objects.equals(sensitiveHeaders, that.sensitiveHeaders) &&
-        Objects.equals(ignoredHeaders, that.ignoredHeaders);
+        Objects.equals(ignoredHeaders, that.ignoredHeaders) &&
+        Objects.equals(apiParamVOS, that.apiParamVOS) &&
+        Objects.equals(apiTransformVOS, that.apiTransformVOS) &&
+        Objects.equals(apiResponseVOS, that.apiResponseVOS);
   }
 
   @Override
   public int hashCode() {
-    return Objects
-        .hash(apiResourceDetailId, apiResourceId, method, operationId, inboundType, outboundType,
-            serviceID, url, stripPrefix, perserveHost, retryable, sensitiveHeaders, ignoredHeaders,
-            maxAutoRetries, connectionTimeout, readTimeout);
+    return Objects.hash(apiResourceDetailId, apiResourceId, method, bprotocal, bmethod, stripPrefix,
+        perserveHost, retryable, sensitiveHeaders, ignoredHeaders, maxAutoRetries,
+        connectionTimeout,
+        readTimeout, apiParamVOS, apiTransformVOS, apiResponseVOS);
   }
 
   @Override
@@ -218,11 +222,8 @@ public class ApiResourceDetailVO{
         "apiResourceDetailId='" + apiResourceDetailId + '\'' +
         ", apiResourceId='" + apiResourceId + '\'' +
         ", method='" + method + '\'' +
-        ", operationId='" + operationId + '\'' +
-        ", inboundType='" + inboundType + '\'' +
-        ", outboundType='" + outboundType + '\'' +
-        ", serviceID='" + serviceID + '\'' +
-        ", url='" + url + '\'' +
+        ", bprotocal='" + bprotocal + '\'' +
+        ", bmethod='" + bmethod + '\'' +
         ", stripPrefix=" + stripPrefix +
         ", perserveHost=" + perserveHost +
         ", retryable=" + retryable +
@@ -231,6 +232,9 @@ public class ApiResourceDetailVO{
         ", maxAutoRetries=" + maxAutoRetries +
         ", connectionTimeout=" + connectionTimeout +
         ", readTimeout=" + readTimeout +
+        ", apiParamVOS=" + apiParamVOS +
+        ", apiTransformVOS=" + apiTransformVOS +
+        ", apiResponseVOS=" + apiResponseVOS +
         '}';
   }
 }

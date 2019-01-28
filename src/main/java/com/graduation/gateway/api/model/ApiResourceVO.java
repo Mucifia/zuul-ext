@@ -16,17 +16,19 @@ import org.hibernate.annotations.GenericGenerator;
 public class ApiResourceVO{
 
 
-  protected String apiResourceId;
+  private String apiResourceId;
 
-  protected String apiId;
+  private String apiId;
 
-  protected String pathName;
+  private String pathName;
 
-  protected String description;
+  private String description;
 
-  protected String targetUri;
+  private String targetUri;
 
-  protected String serviceId;
+  private String serviceId;
+
+  private ApiResourceDetailVO apiResourceDetailVO;
 
   public String getApiResourceId() {
     return apiResourceId;
@@ -76,6 +78,15 @@ public class ApiResourceVO{
     this.serviceId = serviceId;
   }
 
+  public ApiResourceDetailVO getApiResourceDetailVO() {
+    return apiResourceDetailVO;
+  }
+
+  public void setApiResourceDetailVO(
+      ApiResourceDetailVO apiResourceDetailVO) {
+    this.apiResourceDetailVO = apiResourceDetailVO;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -90,12 +101,15 @@ public class ApiResourceVO{
         Objects.equals(pathName, that.pathName) &&
         Objects.equals(description, that.description) &&
         Objects.equals(targetUri, that.targetUri) &&
-        Objects.equals(serviceId, that.serviceId);
+        Objects.equals(serviceId, that.serviceId) &&
+        Objects.equals(apiResourceDetailVO, that.apiResourceDetailVO);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(apiResourceId, apiId, pathName, description, targetUri, serviceId);
+    return Objects
+        .hash(apiResourceId, apiId, pathName, description, targetUri, serviceId,
+            apiResourceDetailVO);
   }
 
   @Override
@@ -107,6 +121,7 @@ public class ApiResourceVO{
         ", description='" + description + '\'' +
         ", targetUri='" + targetUri + '\'' +
         ", serviceId='" + serviceId + '\'' +
+        ", apiResourceDetailVO=" + apiResourceDetailVO +
         '}';
   }
 }

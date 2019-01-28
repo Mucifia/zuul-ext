@@ -23,9 +23,6 @@ public class ApiResponsePO extends GatewayPO{
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   protected String apiResponseId;
 
-  @Column(name = "api_response_detail_id")
-  protected String apiResponseDetailId;
-
   @Column(name = "status")
   protected int status;
 
@@ -49,13 +46,6 @@ public class ApiResponsePO extends GatewayPO{
     this.apiResponseId = apiResponseId;
   }
 
-  public String getApiResponseDetailId() {
-    return apiResponseDetailId;
-  }
-
-  public void setApiResponseDetailId(String apiResponseDetailId) {
-    this.apiResponseDetailId = apiResponseDetailId;
-  }
 
   public int getStatus() {
     return status;
@@ -108,7 +98,6 @@ public class ApiResponsePO extends GatewayPO{
     ApiResponsePO that = (ApiResponsePO) o;
     return status == that.status &&
         Objects.equals(apiResponseId, that.apiResponseId) &&
-        Objects.equals(apiResponseDetailId, that.apiResponseDetailId) &&
         Objects.equals(responseType, that.responseType) &&
         Objects.equals(value, that.value) &&
         Objects.equals(description, that.description) &&
@@ -118,7 +107,7 @@ public class ApiResponsePO extends GatewayPO{
   @Override
   public int hashCode() {
 
-    return Objects.hash(apiResponseId, apiResponseDetailId, status, responseType,value,
+    return Objects.hash(apiResponseId,  status, responseType,value,
         description, apiResourceDetailId);
   }
 }

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
  * @date: 2019/01/26
  * @description:
  */
-public interface ServiceQualityService {
+public interface ServiceQualityInterface {
 
 
   @PostMapping()

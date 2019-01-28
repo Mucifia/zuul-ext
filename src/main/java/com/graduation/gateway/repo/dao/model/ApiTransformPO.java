@@ -26,23 +26,21 @@ public class ApiTransformPO extends GatewayPO{
   @Column(name = "api_resource_detail_id")
   protected String apiResourceDetailId;
 
-  @Column(name = "seq")
-  protected int seq;
+  @Column(name = "name")
+  protected String name;
 
-  @Column(name = "message_type")
-  protected String messageType;
+  @Column(name = "paramlocation")
+  protected String paramLocation;
 
-  @Column(name = "style")
-  protected String style;
+  @Column(name = "incomeparamName")
+  protected String incomeParamName;
 
-  @Column(name = "action")
-  protected String action;
+  @Column(name = "incomeParamLocation")
+  protected String incomeParamLocation;
 
-  @Column(name = "code")
-  protected String code;
 
-  @Column(name = "value")
-  protected String value;
+  @Column(name ="type")
+  protected String type;
 
   public String getApiTransformId() {
     return apiTransformId;
@@ -60,52 +58,44 @@ public class ApiTransformPO extends GatewayPO{
     this.apiResourceDetailId = apiResourceDetailId;
   }
 
-  public int getSeq() {
-    return seq;
+  public String getName() {
+    return name;
   }
 
-  public void setSeq(int seq) {
-    this.seq = seq;
+  public void setName(String name) {
+    this.name = name;
   }
 
-  public String getMessageType() {
-    return messageType;
+  public String getParamLocation() {
+    return paramLocation;
   }
 
-  public void setMessageType(String messageType) {
-    this.messageType = messageType;
+  public void setParamLocation(String paramLocation) {
+    this.paramLocation = paramLocation;
   }
 
-  public String getStyle() {
-    return style;
+  public String getIncomeParamName() {
+    return incomeParamName;
   }
 
-  public void setStyle(String style) {
-    this.style = style;
+  public void setIncomeParamName(String incomeParamName) {
+    this.incomeParamName = incomeParamName;
   }
 
-  public String getAction() {
-    return action;
+  public String getIncomeParamLocation() {
+    return incomeParamLocation;
   }
 
-  public void setAction(String action) {
-    this.action = action;
+  public void setIncomeParamLocation(String incomeParamLocation) {
+    this.incomeParamLocation = incomeParamLocation;
   }
 
-  public String getCode() {
-    return code;
+  public String getType() {
+    return type;
   }
 
-  public void setCode(String code) {
-    this.code = code;
-  }
-
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
+  public void setType(String type) {
+    this.type = type;
   }
 
   @Override
@@ -116,21 +106,22 @@ public class ApiTransformPO extends GatewayPO{
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
     ApiTransformPO that = (ApiTransformPO) o;
-    return seq == that.seq &&
-        Objects.equals(apiTransformId, that.apiTransformId) &&
+    return Objects.equals(apiTransformId, that.apiTransformId) &&
         Objects.equals(apiResourceDetailId, that.apiResourceDetailId) &&
-        Objects.equals(messageType, that.messageType) &&
-        Objects.equals(style, that.style) &&
-        Objects.equals(action, that.action) &&
-        Objects.equals(code, that.code) &&
-        Objects.equals(value, that.value);
+        Objects.equals(name, that.name) &&
+        Objects.equals(paramLocation, that.paramLocation) &&
+        Objects.equals(incomeParamName, that.incomeParamName) &&
+        Objects.equals(incomeParamLocation, that.incomeParamLocation) &&
+        Objects.equals(type, that.type);
   }
 
   @Override
   public int hashCode() {
-
-    return Objects
-        .hash(apiTransformId, apiResourceDetailId, seq, messageType, style, action, code, value);
+    return Objects.hash(super.hashCode(), apiTransformId, apiResourceDetailId, name, paramLocation,
+        incomeParamName, incomeParamLocation, type);
   }
 }

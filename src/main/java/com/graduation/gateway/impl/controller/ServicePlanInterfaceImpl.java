@@ -1,7 +1,7 @@
 package com.graduation.gateway.impl.controller;
 
 import com.graduation.gateway.api.model.ServicePlanVO;
-import com.graduation.gateway.api.service.ServicePlanService;
+import com.graduation.gateway.api.service.ServicePlanInterface;
 import java.util.List;
 
 /**
@@ -9,7 +9,7 @@ import java.util.List;
  * @date: 2019/01/26
  * @description:
  */
-public class ServicePlanServiceImpl implements ServicePlanService {
+public class ServicePlanInterfaceImpl implements ServicePlanInterface {
 
   @Override
   public void saveServicePlan() {

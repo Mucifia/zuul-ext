@@ -1,6 +1,6 @@
 
 
-package com.graduation.gateway.api.util;
+package com.graduation.gateway.api.exception;
 
 import java.util.Arrays;
 import java.util.List;

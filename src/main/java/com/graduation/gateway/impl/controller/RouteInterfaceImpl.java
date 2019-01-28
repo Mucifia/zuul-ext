@@ -5,6 +5,6 @@ package com.graduation.gateway.impl.controller;
  * @date: 2019/01/26
  * @description:
  */
-public class LoadBanlancerServiceImpl {
+public class RouteInterfaceImpl {
 
 }

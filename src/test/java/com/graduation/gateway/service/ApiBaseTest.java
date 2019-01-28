@@ -88,16 +88,13 @@ public class ApiBaseTest {
     for (int i = 0; i < 50; i++) {
       apiBaseVO = new ApiBaseVO();
       apiBaseVO.setBaseUri("1");
-      apiBaseVO.setCorsId("1");
       apiBaseVO.setDescription("test-case");
-      apiBaseVO.setEnable(true);
       apiBaseVO.setHost("127.0.0.1");
       apiBaseVO.setInboundType("s");
       apiBaseVO.setName("test-case");
       apiBaseVO.setOutboundType("s");
       apiBaseVO.setProtocal("s");
       apiBaseVO.setSecurity("ss");
-      apiBaseVO.setStateId("s");
       apiBaseVO.setVersion("1");
       apiBaseVO.setName(String.format("%s%d", "test-case", i));
       apiBaseService.save(apiBaseVO);

@@ -1,7 +1,7 @@
 package com.graduation.gateway.impl.controller;
 
 import com.graduation.gateway.api.model.ServiceQualityVO;
-import com.graduation.gateway.api.service.ServiceQualityService;
+import com.graduation.gateway.api.service.ServiceQualityInterface;
 import java.util.List;
 
 /**
@@ -9,7 +9,7 @@ import java.util.List;
  * @date: 2019/01/26
  * @description:
  */
-public class ServiceQualityServiceImpl implements ServiceQualityService {
+public class ServiceQualityInterfacempl implements ServiceQualityInterface {
 
   @Override
   public void saveServiceQuality() {

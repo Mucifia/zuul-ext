@@ -51,11 +51,11 @@ public class ApiBaseService {
    * save entity
    * @param apiBaseVO
    */
-  public void save(ApiBaseVO apiBaseVO){
+  public ApiBasePO save(ApiBaseVO apiBaseVO){
     /// TODO: 2018-12-22 参数检验
     // name的检验，以及name的独立性
     ApiBasePO apiBasePO = BeanTransformer.convert(apiBaseVO,ApiBasePO.class);
-    apiBaseRepository.save(apiBasePO);
+    return  apiBaseRepository.save(apiBasePO);
   }
   /**
    * save entities

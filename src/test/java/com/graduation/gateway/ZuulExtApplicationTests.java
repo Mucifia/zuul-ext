@@ -123,8 +123,6 @@ public class ZuulExtApplicationTests {
     apiParamPO.setDescription("des");
     apiParamPO.setName("test-case");
     apiParamPO.setParamsType("1");
-    apiParamPO.setRequired(true);
-    apiParamPO.setStyle("1");
     apiParamPO.setValue("1");
 
     //apiResourceDetailPO test-case init
@@ -155,7 +153,6 @@ public class ZuulExtApplicationTests {
 
     //apiResponsePO test-case init;
     apiResponsePO = new ApiResponsePO();
-    apiResponsePO.setApiResponseDetailId("11");
     apiResponsePO.setDescription("des");
     apiResponsePO.setResponseType("11");
     apiResponsePO.setStatus(1);
@@ -164,13 +161,6 @@ public class ZuulExtApplicationTests {
 
     //apiTransformPO test-case init;
     apiTransformPO = new ApiTransformPO();
-    apiTransformPO.setValue("11");
-    apiTransformPO.setAction("11");
-    apiTransformPO.setApiResourceDetailId("11");
-    apiTransformPO.setCode("11");
-    apiTransformPO.setMessageType("!1");
-    apiTransformPO.setSeq(1);
-    apiTransformPO.setStyle("!1");
 
     //corsConfigPO test-case init;
     corsConfigPO = new CorsConfigPO();
@@ -341,7 +331,6 @@ public class ZuulExtApplicationTests {
     apiTransformRepository.save(apiTransformPO);
     ApiTransformPO apiTransform = apiTransformRepository
         .findApiTransformPOByApiResourceDetailId("11");
-    Assert.assertEquals(apiTransform.getCode(), "11");
     apiTransformPO.setDelFlag(true);
     apiTransformRepository.save(apiTransformPO);
     apiTransform = apiTransformRepository.findApiTransformPOByApiResourceDetailId("11");

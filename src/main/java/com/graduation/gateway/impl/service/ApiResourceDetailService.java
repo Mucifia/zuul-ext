@@ -52,7 +52,7 @@ public class ApiResourceDetailService {
 
   }
 
-  public void save(ApiResourceDetailVO apiResourceDetailVO){
-    apiResourceDetailRepository.save(BeanTransformer.convert(apiResourceDetailVO,ApiResourceDetailPO.class));
+  public ApiResourceDetailPO save(ApiResourceDetailVO apiResourceDetailVO){
+    return apiResourceDetailRepository.save(BeanTransformer.convert(apiResourceDetailVO,ApiResourceDetailPO.class));
   }
 }

@@ -29,17 +29,14 @@ public class ApiParamPO extends GatewayPO{
   @Column(name = "name",nullable = false)
   protected String name;
 
-  @Column(name = "style")
-  protected String style;
-
   @Column(name = "params_type")
   protected String paramsType;
 
   @Column(name = "value")
   protected String value;
 
-  @Column(name = "required")
-  protected boolean required;
+  @Column(name = "paramlocation")
+  protected String paramLocation;
 
   @Column(name = "description")
   protected String description;
@@ -68,12 +65,13 @@ public class ApiParamPO extends GatewayPO{
     this.name = name;
   }
 
-  public String getStyle() {
-    return style;
+
+  public String getDescription() {
+    return description;
   }
 
-  public void setStyle(String style) {
-    this.style = style;
+  public void setDescription(String description) {
+    this.description = description;
   }
 
   public String getParamsType() {
@@ -92,20 +90,12 @@ public class ApiParamPO extends GatewayPO{
     this.value = value;
   }
 
-  public boolean isRequired() {
-    return required;
+  public String getParamLocation() {
+    return paramLocation;
   }
 
-  public void setRequired(boolean required) {
-    this.required = required;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
+  public void setParamLocation(String paramLocation) {
+    this.paramLocation = paramLocation;
   }
 
   @Override
@@ -116,22 +106,22 @@ public class ApiParamPO extends GatewayPO{
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
     ApiParamPO that = (ApiParamPO) o;
-    return required == that.required &&
-        Objects.equals(apiParamId, that.apiParamId) &&
+    return Objects.equals(apiParamId, that.apiParamId) &&
         Objects.equals(apiResourceDetailId, that.apiResourceDetailId) &&
         Objects.equals(name, that.name) &&
-        Objects.equals(style, that.style) &&
         Objects.equals(paramsType, that.paramsType) &&
         Objects.equals(value, that.value) &&
+        Objects.equals(paramLocation, that.paramLocation) &&
         Objects.equals(description, that.description);
   }
 
   @Override
   public int hashCode() {
-
-    return Objects
-        .hash(apiParamId, apiResourceDetailId, name, style, paramsType,  value, required,
-            description);
+    return Objects.hash(super.hashCode(), apiParamId, apiResourceDetailId, name, paramsType, value,
+        paramLocation, description);
   }
 }

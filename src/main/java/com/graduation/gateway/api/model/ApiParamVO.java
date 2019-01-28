@@ -1,19 +1,13 @@
 package com.graduation.gateway.api.model;
 
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author: mmy
  * @date: 2018/12/12
  * @description:
  */
-public class ApiParamVO{
+public class ApiParamVO {
 
 
   protected String apiParamId;
@@ -22,13 +16,11 @@ public class ApiParamVO{
 
   protected String name;
 
-  protected String style;
-
   protected String paramsType;
 
   protected String value;
 
-  protected boolean required;
+  protected String paramLocation;
 
   protected String description;
 
@@ -56,14 +48,6 @@ public class ApiParamVO{
     this.name = name;
   }
 
-  public String getStyle() {
-    return style;
-  }
-
-  public void setStyle(String style) {
-    this.style = style;
-  }
-
   public String getParamsType() {
     return paramsType;
   }
@@ -80,12 +64,12 @@ public class ApiParamVO{
     this.value = value;
   }
 
-  public boolean isRequired() {
-    return required;
+  public String getParamLocation() {
+    return paramLocation;
   }
 
-  public void setRequired(boolean required) {
-    this.required = required;
+  public void setParamLocation(String paramLocation) {
+    this.paramLocation = paramLocation;
   }
 
   public String getDescription() {
@@ -105,21 +89,19 @@ public class ApiParamVO{
       return false;
     }
     ApiParamVO that = (ApiParamVO) o;
-    return required == that.required &&
-        Objects.equals(apiParamId, that.apiParamId) &&
+    return Objects.equals(apiParamId, that.apiParamId) &&
         Objects.equals(apiResourceDetailId, that.apiResourceDetailId) &&
         Objects.equals(name, that.name) &&
-        Objects.equals(style, that.style) &&
         Objects.equals(paramsType, that.paramsType) &&
         Objects.equals(value, that.value) &&
+        Objects.equals(paramLocation, that.paramLocation) &&
         Objects.equals(description, that.description);
   }
 
   @Override
   public int hashCode() {
     return Objects
-        .hash(apiParamId, apiResourceDetailId, name, style, paramsType, value, required,
-            description);
+        .hash(apiParamId, apiResourceDetailId, name, paramsType, value, paramLocation, description);
   }
 
   @Override
@@ -128,10 +110,9 @@ public class ApiParamVO{
         "apiParamId='" + apiParamId + '\'' +
         ", apiResourceDetailId='" + apiResourceDetailId + '\'' +
         ", name='" + name + '\'' +
-        ", style='" + style + '\'' +
         ", paramsType='" + paramsType + '\'' +
         ", value='" + value + '\'' +
-        ", required=" + required +
+        ", paramLocation='" + paramLocation + '\'' +
         ", description='" + description + '\'' +
         '}';
   }

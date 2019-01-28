@@ -1,6 +1,6 @@
 package com.graduation.gateway.api.service;
 
-import com.graduation.gateway.api.model.ApiBaseVO;
+import com.graduation.gateway.api.model.ServicePlanVO;
 import java.util.List;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,23 +12,25 @@ import org.springframework.web.bind.annotation.PutMapping;
  * @date: 2019/01/26
  * @description:
  */
-public interface ApiBaseService {
+public interface ServicePlanInterface {
+
 
   @PostMapping()
-  public void saveApiBase();
+  public void saveServicePlan();
 
   @GetMapping()
-  public ApiBaseVO getApiBase();
+  public ServicePlanVO getServicePlan();
 
   @GetMapping()
-  public List<ApiBaseVO> getApiBases();
+  public List<ServicePlanVO> getServicePlans();
 
   @PutMapping()
-  public void updateApiBase();
+  public void updateServicePlan();
 
   @DeleteMapping()
-  public void deleteApiBase();
+  public void deleteServicePlan();
 
 
 
 }
+

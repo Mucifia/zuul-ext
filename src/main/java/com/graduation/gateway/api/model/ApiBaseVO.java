@@ -11,42 +11,27 @@ import java.util.Set;
  */
 public class ApiBaseVO {
 
-  protected String apiId;
+  private String apiId;
 
-  protected String name;
+  private String name;
 
-  protected String baseUri;
+  private String baseUri;
 
-  protected String host;
+  private String host;
 
-  protected String version;
+  private String version;
 
-  protected String description;
+  private String description;
 
-  protected String protocal;
+  private String protocal;
 
-  protected String inboundType;
+  private String inboundType;
 
-  protected String outboundType;
+  private String outboundType;
 
-  protected String corsId;
+  private String security;
 
-  protected String security;
-
-  protected boolean enable;
-
-  protected String stateId;
-
-  protected Set<ServicePlanVO> servicePlanVOSet = new HashSet<>();
-
-  public Set<ServicePlanVO> getServicePlanVOSet() {
-    return servicePlanVOSet;
-  }
-
-  public void setServicePlanVOSet(
-      Set<ServicePlanVO> servicePlanVOSet) {
-    this.servicePlanVOSet = servicePlanVOSet;
-  }
+  private ApiResourceVO apiResourceVO;
 
   public String getApiId() {
     return apiId;
@@ -120,14 +105,6 @@ public class ApiBaseVO {
     this.outboundType = outboundType;
   }
 
-  public String getCorsId() {
-    return corsId;
-  }
-
-  public void setCorsId(String corsId) {
-    this.corsId = corsId;
-  }
-
   public String getSecurity() {
     return security;
   }
@@ -136,20 +113,12 @@ public class ApiBaseVO {
     this.security = security;
   }
 
-  public boolean isEnable() {
-    return enable;
+  public ApiResourceVO getApiResourceVO() {
+    return apiResourceVO;
   }
 
-  public void setEnable(boolean enable) {
-    this.enable = enable;
-  }
-
-  public String getStateId() {
-    return stateId;
-  }
-
-  public void setStateId(String stateId) {
-    this.stateId = stateId;
+  public void setApiResourceVO(ApiResourceVO apiResourceVO) {
+    this.apiResourceVO = apiResourceVO;
   }
 
   @Override
@@ -161,8 +130,7 @@ public class ApiBaseVO {
       return false;
     }
     ApiBaseVO apiBaseVO = (ApiBaseVO) o;
-    return enable == apiBaseVO.enable &&
-        Objects.equals(apiId, apiBaseVO.apiId) &&
+    return Objects.equals(apiId, apiBaseVO.apiId) &&
         Objects.equals(name, apiBaseVO.name) &&
         Objects.equals(baseUri, apiBaseVO.baseUri) &&
         Objects.equals(host, apiBaseVO.host) &&
@@ -171,17 +139,15 @@ public class ApiBaseVO {
         Objects.equals(protocal, apiBaseVO.protocal) &&
         Objects.equals(inboundType, apiBaseVO.inboundType) &&
         Objects.equals(outboundType, apiBaseVO.outboundType) &&
-        Objects.equals(corsId, apiBaseVO.corsId) &&
         Objects.equals(security, apiBaseVO.security) &&
-        Objects.equals(stateId, apiBaseVO.stateId) &&
-        Objects.equals(servicePlanVOSet, apiBaseVO.servicePlanVOSet);
+        Objects.equals(apiResourceVO, apiBaseVO.apiResourceVO);
   }
 
   @Override
   public int hashCode() {
     return Objects
         .hash(apiId, name, baseUri, host, version, description, protocal, inboundType, outboundType,
-            corsId, security, enable, stateId, servicePlanVOSet);
+            security, apiResourceVO);
   }
 
   @Override
@@ -196,11 +162,8 @@ public class ApiBaseVO {
         ", protocal='" + protocal + '\'' +
         ", inboundType='" + inboundType + '\'' +
         ", outboundType='" + outboundType + '\'' +
-        ", corsId='" + corsId + '\'' +
         ", security='" + security + '\'' +
-        ", enable=" + enable +
-        ", stateId='" + stateId + '\'' +
-        ", servicePlanVOSet=" + servicePlanVOSet +
+        ", apiResourceVO=" + apiResourceVO +
         '}';
   }
 }
