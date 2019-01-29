@@ -6,6 +6,7 @@ import com.graduation.gateway.impl.utils.GatewayImplConstants;
 import com.graduation.gateway.repo.dao.model.ApiParamPO;
 import com.graduation.gateway.repo.dao.repository.ApiParamRepository;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,13 @@ public class ApiParamService {
 
   public void save(ApiParamVO apiParamVO){
     apiParamRepository.save(BeanTransformer.convert(apiParamVO,ApiParamPO.class));
+  }
+
+  public void save(List<ApiParamVO> apiParamVOS){
+    List<ApiParamPO> apiParamPOS = apiParamVOS.stream().map(apiParamVO -> {
+      return BeanTransformer.convert(apiParamVO,ApiParamPO.class);
+    }).collect(Collectors.toList());
+    apiParamRepository.save(apiParamPOS);
   }
 
 }

@@ -1,5 +1,6 @@
 package com.graduation.gateway.api.model;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -30,6 +31,8 @@ public class ApiBaseVO {
   private String outboundType;
 
   private String security;
+
+  private Date updateTime;
 
   private ApiResourceVO apiResourceVO;
 
@@ -121,6 +124,14 @@ public class ApiBaseVO {
     this.apiResourceVO = apiResourceVO;
   }
 
+  public Date getUpdateTime() {
+    return updateTime;
+  }
+
+  public void setUpdateTime(Date updateTime) {
+    this.updateTime = updateTime;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -140,6 +151,7 @@ public class ApiBaseVO {
         Objects.equals(inboundType, apiBaseVO.inboundType) &&
         Objects.equals(outboundType, apiBaseVO.outboundType) &&
         Objects.equals(security, apiBaseVO.security) &&
+        Objects.equals(updateTime, apiBaseVO.updateTime) &&
         Objects.equals(apiResourceVO, apiBaseVO.apiResourceVO);
   }
 
@@ -147,7 +159,7 @@ public class ApiBaseVO {
   public int hashCode() {
     return Objects
         .hash(apiId, name, baseUri, host, version, description, protocal, inboundType, outboundType,
-            security, apiResourceVO);
+            security, updateTime, apiResourceVO);
   }
 
   @Override
@@ -163,6 +175,7 @@ public class ApiBaseVO {
         ", inboundType='" + inboundType + '\'' +
         ", outboundType='" + outboundType + '\'' +
         ", security='" + security + '\'' +
+        ", updateTime=" + updateTime +
         ", apiResourceVO=" + apiResourceVO +
         '}';
   }

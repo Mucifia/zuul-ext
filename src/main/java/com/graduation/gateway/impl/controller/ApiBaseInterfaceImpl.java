@@ -50,19 +50,34 @@ public class ApiBaseInterfaceImpl implements ApiBaseInterface {
 
   @Override
   public void saveApiBase(@RequestBody  ApiBaseVO apiBaseVO) throws GatewayServiceException {
+    //save apiBase
     String apiId = apiBaseService.save(apiBaseVO).getApiId();
     ApiResourceVO apiResourceVO = apiBaseVO.getApiResourceVO();
     apiResourceVO.setApiId(apiId);
+    //save apiresource
     String apiResourceId =apiResourceService.save(apiResourceVO).getApiResourceId();
     ApiResourceDetailVO apiResourceDetailVO = apiResourceVO.getApiResourceDetailVO();
     apiResourceDetailVO.setApiResourceId(apiResourceId);
+    //save apiresourceDeteail
     String apiResourceDetailId = apiResourceDetailService.save(apiResourceDetailVO).getApiResourceDetailId();
-//    ApiParamVO apiParamVO = apiResourceDetailVO.getApiParamVO();
-//    apiParamVO.setApiResourceDetailId(apiResourceDetailId);
-//    ApiResponseVO apiResponseVO = apiResourceDetailVO.getApiResponseVO();
-//    apiResponseVO.setApiResourceDetailId(apiResourceDetailId);
-//    ApiTransformVO apiTransformVO = apiResourceDetailVO.getApiTransformVO();
-//    apiTransformVO.setApiResourceDetailId(apiResourceDetailId);
+    //save apiParams
+    List<ApiParamVO> apiParamVOS = apiResourceDetailVO.getApiParamVOS();
+    apiParamVOS.stream().forEach(apiParamVO -> {
+      apiParamVO.setApiResourceDetailId(apiResourceDetailId);
+    });
+    apiParamService.save(apiParamVOS);
+    //save apiTransfroms
+    List<ApiTransformVO> apiTransformVOS = apiResourceDetailVO.getApiTransformVOS();
+    apiTransformVOS.stream().forEach(apiTransformVO -> {
+      apiTransformVO.setApiResourceDetailId(apiResourceDetailId);
+    });
+    apiTransformService.save(apiTransformVOS);
+    //save apiResponses
+    List<ApiResponseVO> apiResponseVOS = apiResourceDetailVO.getApiResponseVOS();
+    apiResponseVOS.stream().forEach(apiResponseVO -> {
+      apiResponseVO.setApiResourceDetailId(apiResourceDetailId);
+    });
+    apiResponseService.save(apiResponseVOS);
   }
 
   @Override
@@ -72,7 +87,7 @@ public class ApiBaseInterfaceImpl implements ApiBaseInterface {
 
   @Override
   public List<ApiBaseVO> getApiBases() throws GatewayServiceException {
-    return null;
+    return apiBaseService.getAllApiBase();
   }
 
   @Override

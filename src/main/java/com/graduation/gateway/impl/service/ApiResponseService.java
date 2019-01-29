@@ -6,6 +6,7 @@ import com.graduation.gateway.impl.utils.GatewayImplConstants;
 import com.graduation.gateway.repo.dao.model.ApiResponsePO;
 import com.graduation.gateway.repo.dao.repository.ApiResponseRepository;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,11 @@ public class ApiResponseService {
 
   public void save(ApiResponseVO apiResponseVO){
     apiResponseRepository.save(BeanTransformer.convert(apiResponseVO,ApiResponsePO.class));
+  }
+  public void save(List<ApiResponseVO> apiResponseVOS){
+    List<ApiResponsePO> apiResponsePOS = apiResponseVOS.stream().map(apiResponseVO -> {
+      return BeanTransformer.convert(apiResponseVO,ApiResponsePO.class);
+    }).collect(Collectors.toList());
+    apiResponseRepository.save(apiResponsePOS);
   }
 }

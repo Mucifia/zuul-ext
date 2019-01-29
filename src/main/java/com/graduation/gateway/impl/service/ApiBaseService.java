@@ -47,36 +47,34 @@ public class ApiBaseService {
 
   @Autowired
   ServicePlanService servicePlanService;
+
   /**
    * save entity
-   * @param apiBaseVO
    */
-  public ApiBasePO save(ApiBaseVO apiBaseVO){
+  public ApiBasePO save(ApiBaseVO apiBaseVO) {
     /// TODO: 2018-12-22 参数检验
     // name的检验，以及name的独立性
-    ApiBasePO apiBasePO = BeanTransformer.convert(apiBaseVO,ApiBasePO.class);
-    return  apiBaseRepository.save(apiBasePO);
+    ApiBasePO apiBasePO = BeanTransformer.convert(apiBaseVO, ApiBasePO.class);
+    return apiBaseRepository.save(apiBasePO);
   }
+
   /**
    * save entities
-   * @param apiBaseVOS
    */
-  public void save(List<ApiBaseVO> apiBaseVOS){
+  public void save(List<ApiBaseVO> apiBaseVOS) {
     /// TODO: 2018-12-22 参数检验
     // name的检验，以及name的独立性
-    List<ApiBasePO> apiBasePOS = apiBaseVOS.stream().map(a->{
-      return BeanTransformer.convert(a,ApiBasePO.class);
+    List<ApiBasePO> apiBasePOS = apiBaseVOS.stream().map(a -> {
+      return BeanTransformer.convert(a, ApiBasePO.class);
     }).collect(Collectors.toList());
     apiBaseRepository.save(apiBasePOS);
   }
 
   /**
    * find by api_name
-   * @param name
-   * @return
    */
-  public ApiBaseVO findByName(String name){
-    return BeanTransformer.convert(apiBaseRepository.findApiBasePOByName(name),ApiBaseVO.class);
+  public ApiBaseVO findByName(String name) {
+    return BeanTransformer.convert(apiBaseRepository.findApiBasePOByName(name), ApiBaseVO.class);
   }
 
   /**
@@ -133,9 +131,10 @@ public class ApiBaseService {
 
 
   public List<ApiBaseVO> getApiByServicePlanId(String servicePlanId, int pageIdex, int pageSize) {
-    List<String> apiIds = servicePlanApiRelationService.getApiIdsByServiceId(servicePlanId,pageIdex,pageSize);
+    List<String> apiIds = servicePlanApiRelationService
+        .getApiIdsByServiceId(servicePlanId, pageIdex, pageSize);
     return apiBaseRepository.findAll(apiIds).stream().map(apiBasePO -> {
-      return BeanTransformer.convert(apiBasePO,ApiBaseVO.class);
+      return BeanTransformer.convert(apiBasePO, ApiBaseVO.class);
     }).collect(Collectors.toList());
   }
 
@@ -151,9 +150,10 @@ public class ApiBaseService {
 
   public List<ApiBaseVO> getApiByServicePlanName(String name, int pageIdex, int pageSize) {
     String servicePlanId = servicePlanService.getByName(name).getServicePlanId();
-    List<String> apiIds = servicePlanApiRelationService.getApiIdsByServiceId(servicePlanId,pageIdex,pageSize);
+    List<String> apiIds = servicePlanApiRelationService
+        .getApiIdsByServiceId(servicePlanId, pageIdex, pageSize);
     return apiBaseRepository.findAll(apiIds).stream().map(apiBasePO -> {
-      return BeanTransformer.convert(apiBasePO,ApiBaseVO.class);
+      return BeanTransformer.convert(apiBasePO, ApiBaseVO.class);
     }).collect(Collectors.toList());
   }
 
@@ -161,9 +161,16 @@ public class ApiBaseService {
   public List<ApiBaseVO> getApiByServicePlanName(String name) {
 
     ServicePlanVO servicePlanVO = servicePlanService.getByName(name);
-    List<String> apiIds = servicePlanApiRelationService.getApiIdsByServiceId(servicePlanVO.getServicePlanId());
+    List<String> apiIds = servicePlanApiRelationService
+        .getApiIdsByServiceId(servicePlanVO.getServicePlanId());
     List<ApiBasePO> apiBasePOS = apiBaseRepository.findAll(apiIds);
     return apiBasePOS.stream().map(apiBasePO -> {
+      return BeanTransformer.convert(apiBasePO, ApiBaseVO.class);
+    }).collect(Collectors.toList());
+  }
+
+  public List<ApiBaseVO> getAllApiBase() {
+    return apiBaseRepository.findAll().stream().map(apiBasePO -> {
       return BeanTransformer.convert(apiBasePO, ApiBaseVO.class);
     }).collect(Collectors.toList());
   }
