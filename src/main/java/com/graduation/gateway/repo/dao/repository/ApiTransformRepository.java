@@ -18,4 +18,6 @@ public interface ApiTransformRepository extends JpaRepository<ApiTransformPO,Str
   public List<ApiTransformPO> findAllByApiResourceDetailId(@Param("ids") List<String> apiResourceDetailId);
 
   public ApiTransformPO findApiTransformPOByApiResourceDetailId(String apiResourceId);
+
+  public List<ApiTransformPO> findApiTransformPOSByApiResourceDetailId(String apiResourceDetailId);
 }

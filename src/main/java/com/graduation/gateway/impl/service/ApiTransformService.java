@@ -5,6 +5,7 @@ import com.graduation.gateway.impl.utils.BeanTransformer;
 import com.graduation.gateway.impl.utils.GatewayImplConstants;
 import com.graduation.gateway.repo.dao.model.ApiTransformPO;
 import com.graduation.gateway.repo.dao.repository.ApiTransformRepository;
+import java.io.ObjectStreamClass;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,14 @@ public class ApiTransformService {
       return BeanTransformer.convert(apiTransformVO,ApiTransformPO.class);
     }).collect(Collectors.toList());
     apiTransformRepository.save(apiTransformPOS);
+  }
+
+  public List<ApiTransformVO> getApiTransformsByApiResourceDetailId(String apiResourceDetailId){
+    List<ApiTransformPO> apiTransformPOS = apiTransformRepository.findApiTransformPOSByApiResourceDetailId(apiResourceDetailId);
+    return apiTransformPOS.stream().map(apiTransformPO -> {
+      ApiTransformVO apiTransformVO = BeanTransformer.convert(apiTransformPO,ApiTransformVO.class);
+      apiTransformVO.setKey(apiTransformVO.getApiTransformId());
+      return apiTransformVO;
+    }).collect(Collectors.toList());
   }
 }

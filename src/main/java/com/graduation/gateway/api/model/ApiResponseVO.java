@@ -16,17 +16,17 @@ import org.hibernate.annotations.GenericGenerator;
 public class ApiResponseVO{
 
 
-  protected String apiResponseId;
+  private String apiResponseId;
 
-  protected int status;
+  private String errorCode;
 
-  protected String responseType;
+  private String errorinformation;
 
-  protected String value;
+  private String description;
 
-  protected String description;
+  private String apiResourceDetailId;
 
-  protected String apiResourceDetailId;
+  private String key;
 
   public String getApiResponseId() {
     return apiResponseId;
@@ -36,30 +36,6 @@ public class ApiResponseVO{
     this.apiResponseId = apiResponseId;
   }
 
-
-  public int getStatus() {
-    return status;
-  }
-
-  public void setStatus(int status) {
-    this.status = status;
-  }
-
-  public String getResponseType() {
-    return responseType;
-  }
-
-  public void setResponseType(String responseType) {
-    this.responseType = responseType;
-  }
-
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
-  }
 
   public String getDescription() {
     return description;
@@ -77,6 +53,30 @@ public class ApiResponseVO{
     this.apiResourceDetailId = apiResourceDetailId;
   }
 
+  public String getKey() {
+    return key;
+  }
+
+  public void setKey(String key) {
+    this.key = key;
+  }
+
+  public String getErrorCode() {
+    return errorCode;
+  }
+
+  public void setErrorCode(String errorCode) {
+    this.errorCode = errorCode;
+  }
+
+  public String getErrorinformation() {
+    return errorinformation;
+  }
+
+  public void setErrorinformation(String errorinformation) {
+    this.errorinformation = errorinformation;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -86,30 +86,29 @@ public class ApiResponseVO{
       return false;
     }
     ApiResponseVO that = (ApiResponseVO) o;
-    return status == that.status &&
-        Objects.equals(apiResponseId, that.apiResponseId) &&
-        Objects.equals(responseType, that.responseType) &&
-        Objects.equals(value, that.value) &&
+    return Objects.equals(apiResponseId, that.apiResponseId) &&
+        Objects.equals(errorCode, that.errorCode) &&
+        Objects.equals(errorinformation, that.errorinformation) &&
         Objects.equals(description, that.description) &&
-        Objects.equals(apiResourceDetailId, that.apiResourceDetailId);
+        Objects.equals(apiResourceDetailId, that.apiResourceDetailId) &&
+        Objects.equals(key, that.key);
   }
 
   @Override
   public int hashCode() {
     return Objects
-        .hash(apiResponseId, status, responseType, value, description,
-            apiResourceDetailId);
+        .hash(apiResponseId, errorCode, errorinformation, description, apiResourceDetailId, key);
   }
 
   @Override
   public String toString() {
     return "ApiResponseVO{" +
         "apiResponseId='" + apiResponseId + '\'' +
-        ", status=" + status +
-        ", responseType='" + responseType + '\'' +
-        ", value='" + value + '\'' +
+        ", errorCode='" + errorCode + '\'' +
+        ", errorinformation='" + errorinformation + '\'' +
         ", description='" + description + '\'' +
         ", apiResourceDetailId='" + apiResourceDetailId + '\'' +
+        ", key='" + key + '\'' +
         '}';
   }
 }

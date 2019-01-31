@@ -52,8 +52,15 @@ public class ApiResourceService {
       return BeanTransformer.convert(t,ApiResourceVO.class);
     }).collect(Collectors.toList());
   }
+
   public ApiResourcePO save(ApiResourceVO apiResourceVO){
     return apiResourceRepository.save(BeanTransformer.convert(apiResourceVO,ApiResourcePO.class));
   }
+
+  public ApiResourceVO getApiResourceByApiId(String apiId){
+    return BeanTransformer.convert(apiResourceRepository.findApiResourcePOByApiId(apiId),ApiResourceVO.class);
+  }
+
+
 
 }

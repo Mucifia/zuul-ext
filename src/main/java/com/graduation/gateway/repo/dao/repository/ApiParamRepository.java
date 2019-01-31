@@ -18,4 +18,5 @@ public interface ApiParamRepository extends JpaRepository<ApiParamPO,String> {
   @Query( "select o from ApiParamPO o where apiResourceDetailId in :ids" )
   public List<ApiParamPO> findAllByApiResourceDetailId(@Param("ids") List<String> apiResourceDetailIds);
 
+  public List<ApiParamPO> findALlByApiResourceDetailId(String apiResourceDetailId);
 }

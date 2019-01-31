@@ -10,19 +10,21 @@ import java.util.Objects;
 public class ApiParamVO {
 
 
-  protected String apiParamId;
+  private String apiParamId;
 
-  protected String apiResourceDetailId;
+  private String apiResourceDetailId;
 
-  protected String name;
+  private String name;
 
-  protected String paramsType;
+  private String paramsType;
 
-  protected String value;
+  private String value;
 
-  protected String paramLocation;
+  private String paramLocation;
 
-  protected String description;
+  private String description;
+
+  private String key;
 
   public String getApiParamId() {
     return apiParamId;
@@ -78,6 +80,14 @@ public class ApiParamVO {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public String getKey() {
+    return key;
+  }
+
+  public void setKey(String key) {
+    this.key = key;
   }
 
   @Override

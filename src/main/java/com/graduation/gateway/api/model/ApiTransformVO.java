@@ -11,19 +11,21 @@ import java.util.Objects;
 public class ApiTransformVO{
 
 
-  protected String apiTransformId;
+  private String apiTransformId;
 
-  protected String apiResourceDetailId;
+  private String apiResourceDetailId;
 
-  protected String name;
+  private String name;
 
-  protected String paramLocation;
+  private String paramLocation;
 
-  protected String incomeParamName;
+  private String incomeParamName;
 
-  protected String incomeParamLocation;
+  private String incomeParamLocation;
 
-  protected String type;
+  private String type;
+
+  private String key;
 
   public String getApiTransformId() {
     return apiTransformId;
@@ -79,6 +81,14 @@ public class ApiTransformVO{
 
   public void setType(String type) {
     this.type = type;
+  }
+
+  public String getKey() {
+    return key;
+  }
+
+  public void setKey(String key) {
+    this.key = key;
   }
 
   @Override

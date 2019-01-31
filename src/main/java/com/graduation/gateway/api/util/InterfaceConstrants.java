@@ -68,4 +68,5 @@ public interface InterfaceConstrants {
     String SERVICE_PLAN_STATUS_RUNNING = "running";
     String SERVICE_PLAN_STATUS_RETIRED = "retired";
 
-  }
+    String STRING_SEPARATE_COMMA = ",";
+}

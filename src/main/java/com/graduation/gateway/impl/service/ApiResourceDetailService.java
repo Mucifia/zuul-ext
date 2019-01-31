@@ -55,4 +55,8 @@ public class ApiResourceDetailService {
   public ApiResourceDetailPO save(ApiResourceDetailVO apiResourceDetailVO){
     return apiResourceDetailRepository.save(BeanTransformer.convert(apiResourceDetailVO,ApiResourceDetailPO.class));
   }
+  public ApiResourceDetailVO getApiResourceDetailByResourceID(String resourceId){
+    return BeanTransformer.convert(apiResourceDetailRepository.findApiResourceDetailPOByApiResourceId(resourceId),ApiResourceDetailVO.class);
+  }
+
 }

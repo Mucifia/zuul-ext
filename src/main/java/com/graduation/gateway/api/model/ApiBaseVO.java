@@ -32,6 +32,8 @@ public class ApiBaseVO {
 
   private String security;
 
+  private String key;
+
   private Date updateTime;
 
   private ApiResourceVO apiResourceVO;
@@ -130,6 +132,14 @@ public class ApiBaseVO {
 
   public void setUpdateTime(Date updateTime) {
     this.updateTime = updateTime;
+  }
+
+  public String getKey() {
+    return key;
+  }
+
+  public void setKey(String key) {
+    this.key = key;
   }
 
   @Override

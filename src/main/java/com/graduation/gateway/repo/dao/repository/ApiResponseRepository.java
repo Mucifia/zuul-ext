@@ -17,4 +17,6 @@ public interface ApiResponseRepository extends JpaRepository<ApiResponsePO,Strin
   public List<ApiResponsePO> findAllByApiResourceDetailId(@Param("ids") List<String> apiResourceDetailIds);
 
   public ApiResponsePO findApiResponsePOByApiResourceDetailId(String apiResourceId);
+
+  public List<ApiResponsePO> findApiResponsePOSByApiResourceDetailId(String apiResourceId);
 }

@@ -23,14 +23,11 @@ public class ApiResponsePO extends GatewayPO{
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   protected String apiResponseId;
 
-  @Column(name = "status")
-  protected int status;
+  @Column(name = "errorCode")
+  private String errorCode;
 
-  @Column(name = "response_type")
-  protected String responseType;
-
-  @Column(name = "value")
-  protected String value;
+  @Column(name = "errorinformation")
+  private String errorinformation;
 
   @Column(name = "description")
   protected String description;
@@ -46,29 +43,20 @@ public class ApiResponsePO extends GatewayPO{
     this.apiResponseId = apiResponseId;
   }
 
-
-  public int getStatus() {
-    return status;
+  public String getErrorCode() {
+    return errorCode;
   }
 
-  public void setStatus(int status) {
-    this.status = status;
+  public void setErrorCode(String errorCode) {
+    this.errorCode = errorCode;
   }
 
-  public String getResponseType() {
-    return responseType;
+  public String getErrorinformation() {
+    return errorinformation;
   }
 
-  public void setResponseType(String responseType) {
-    this.responseType = responseType;
-  }
-
-  public String getValue() {
-    return value;
-  }
-
-  public void setValue(String value) {
-    this.value = value;
+  public void setErrorinformation(String errorinformation) {
+    this.errorinformation = errorinformation;
   }
 
   public String getDescription() {
@@ -95,19 +83,20 @@ public class ApiResponsePO extends GatewayPO{
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
     ApiResponsePO that = (ApiResponsePO) o;
-    return status == that.status &&
-        Objects.equals(apiResponseId, that.apiResponseId) &&
-        Objects.equals(responseType, that.responseType) &&
-        Objects.equals(value, that.value) &&
+    return Objects.equals(apiResponseId, that.apiResponseId) &&
+        Objects.equals(errorCode, that.errorCode) &&
+        Objects.equals(errorinformation, that.errorinformation) &&
         Objects.equals(description, that.description) &&
         Objects.equals(apiResourceDetailId, that.apiResourceDetailId);
   }
 
   @Override
   public int hashCode() {
-
-    return Objects.hash(apiResponseId,  status, responseType,value,
-        description, apiResourceDetailId);
+    return Objects.hash(super.hashCode(), apiResponseId, errorCode, errorinformation, description,
+        apiResourceDetailId);
   }
 }

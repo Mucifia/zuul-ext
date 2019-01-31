@@ -5,9 +5,11 @@ import com.graduation.gateway.impl.utils.BeanTransformer;
 import com.graduation.gateway.impl.utils.GatewayImplConstants;
 import com.graduation.gateway.repo.dao.model.ApiParamPO;
 import com.graduation.gateway.repo.dao.repository.ApiParamRepository;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 /**
@@ -38,6 +40,15 @@ public class ApiParamService {
       return BeanTransformer.convert(apiParamVO,ApiParamPO.class);
     }).collect(Collectors.toList());
     apiParamRepository.save(apiParamPOS);
+  }
+
+  public List<ApiParamVO> getApiParamsByDetailId(String resourceDetailId){
+    List<ApiParamPO> apiParamPOS = apiParamRepository.findALlByApiResourceDetailId(resourceDetailId);
+    return  apiParamPOS.stream().map(apiParamPO -> {
+      ApiParamVO apiParamVO =  BeanTransformer.convert(apiParamPO,ApiParamVO.class);
+      apiParamVO.setKey(apiParamVO.getApiParamId());
+      return apiParamVO;
+    }).collect(Collectors.toList());
   }
 
 }

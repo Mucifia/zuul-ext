@@ -13,4 +13,6 @@ public interface ApiBaseRepository extends JpaRepository<ApiBasePO,String>{
 
   public ApiBasePO findApiBasePOByName(String name);
 
+  public List<ApiBasePO> findAllByDelFlagIsFalse();
+
 }

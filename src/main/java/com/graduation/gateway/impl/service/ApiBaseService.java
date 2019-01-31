@@ -170,8 +170,12 @@ public class ApiBaseService {
   }
 
   public List<ApiBaseVO> getAllApiBase() {
-    return apiBaseRepository.findAll().stream().map(apiBasePO -> {
+    return apiBaseRepository.findAllByDelFlagIsFalse().stream().map(apiBasePO -> {
       return BeanTransformer.convert(apiBasePO, ApiBaseVO.class);
     }).collect(Collectors.toList());
+  }
+
+  public ApiBaseVO getApiBaseByApiId(String apiId) {
+    return BeanTransformer.convert(apiBaseRepository.findOne(apiId),ApiBaseVO.class);
   }
 }

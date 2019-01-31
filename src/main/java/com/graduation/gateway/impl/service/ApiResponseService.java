@@ -21,21 +21,33 @@ public class ApiResponseService {
   @Autowired
   ApiResponseRepository apiResponseRepository;
 
-  public void updateDelFlagByApiId(List<String> apiResourceDetailIds){
-    List<ApiResponsePO> apiResponsePOS = apiResponseRepository.findAllByApiResourceDetailId(apiResourceDetailIds);
+  public void updateDelFlagByApiId(List<String> apiResourceDetailIds) {
+    List<ApiResponsePO> apiResponsePOS = apiResponseRepository
+        .findAllByApiResourceDetailId(apiResourceDetailIds);
     apiResponsePOS.stream().forEach(apiResponsePO -> {
       apiResponsePO.setDelFlag(GatewayImplConstants.DELETE_FLAG_TRUE);
     });
     apiResponseRepository.save(apiResponsePOS);
   }
 
-  public void save(ApiResponseVO apiResponseVO){
-    apiResponseRepository.save(BeanTransformer.convert(apiResponseVO,ApiResponsePO.class));
+  public void save(ApiResponseVO apiResponseVO) {
+    apiResponseRepository.save(BeanTransformer.convert(apiResponseVO, ApiResponsePO.class));
   }
-  public void save(List<ApiResponseVO> apiResponseVOS){
+
+  public void save(List<ApiResponseVO> apiResponseVOS) {
     List<ApiResponsePO> apiResponsePOS = apiResponseVOS.stream().map(apiResponseVO -> {
-      return BeanTransformer.convert(apiResponseVO,ApiResponsePO.class);
+      return BeanTransformer.convert(apiResponseVO, ApiResponsePO.class);
     }).collect(Collectors.toList());
     apiResponseRepository.save(apiResponsePOS);
   }
+
+  public List<ApiResponseVO> getApiResponsesByApiResourceDetailId(String apiResourceDetailId){
+    List<ApiResponsePO> apiResponsePOS = apiResponseRepository.findApiResponsePOSByApiResourceDetailId(apiResourceDetailId);
+    return apiResponsePOS.stream().map(apiResponsePO -> {
+      ApiResponseVO apiResponseVO = BeanTransformer.convert(apiResponsePO,ApiResponseVO.class);
+      apiResponseVO.setKey(apiResponseVO.getApiResourceDetailId());
+      return apiResponseVO;
+    }).collect(Collectors.toList());
+  }
+
 }

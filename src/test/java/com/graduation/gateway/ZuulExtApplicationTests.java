@@ -154,9 +154,6 @@ public class ZuulExtApplicationTests {
     //apiResponsePO test-case init;
     apiResponsePO = new ApiResponsePO();
     apiResponsePO.setDescription("des");
-    apiResponsePO.setResponseType("11");
-    apiResponsePO.setStatus(1);
-    apiResponsePO.setValue("11");
     apiResponsePO.setApiResourceDetailId("1");
 
     //apiTransformPO test-case init;

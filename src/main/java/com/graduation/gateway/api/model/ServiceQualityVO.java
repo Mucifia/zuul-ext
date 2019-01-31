@@ -15,31 +15,31 @@ import org.hibernate.annotations.GenericGenerator;
  */
 public class ServiceQualityVO {
 
-  protected String serviceQualityId;
+  private String serviceQualityId;
 
-  protected String requestLimit;
+  private String requestLimit;
 
-  protected int requestTimeout;
+  private int requestTimeout;
 
-  protected String maxConcurrency;
+  private String maxConcurrency;
 
-  protected boolean cbEnable;
+  private boolean cbEnable;
 
-  protected int cbRecoverTime;
+  private int cbRecoverTime;
 
-  protected String cbErrorPercentage;
+  private String cbErrorPercentage;
 
-  protected String cbRequestVolumeThreshold;
+  private String cbRequestVolumeThreshold;
 
-  protected String requestLimitQuota;
+  private String requestLimitQuota;
 
-  protected String requestLimitType;
+  private String requestLimitType;
 
-  protected String refreshInterval;
+  private String refreshInterval;
 
-  protected String servicePlanId;
+  private String servicePlanId;
 
-  protected String routeId;
+  private String routeId;
 
 
   public String getServiceQualityId() {
