@@ -25,9 +25,6 @@ public class ServicePlanService {
   @Autowired
   ServicePlanRepository servicePlanRepository;
 
-  @Autowired
-  ServiceLoadBalancerService serviceLoadBalancerService;
-
   public void updateDelFlagById(String servicePlanId) {
     ServicePlanPO servicePlanPO = servicePlanRepository
         .findServicePlanPOByServicePlanIdAndStatusEquals(servicePlanId,
@@ -75,9 +72,12 @@ public class ServicePlanService {
     servicePlanRepository.save(servicePlanPOS);
   }
 
-  public ServiceLoadBalancerVO getServiceLoadBalancer(String serviceQualityId) {
-    return serviceLoadBalancerService.getServiceLoadBalancerByServiceQualityId(serviceQualityId);
+  public List<ServicePlanVO> getServicePlanVOByQualityId(String qualityId){
+    return servicePlanRepository.findServicePlanPOSByServiceQualityId(qualityId).stream().map(servicePlanPO -> {
+      return BeanTransformer.convert(servicePlanPO,ServicePlanVO.class);
+    }).collect(Collectors.toList());
   }
+
 
 
 }

@@ -9,7 +9,7 @@ public interface InterfaceConstrants {
 
     // parent path
     String PARENT_PATH_SERVICE_PLAN = "/serviceplan";
-    String PARENT_PATH_SERVICE_PLAN_QUALITY = "/serviceplanquality";
+    String PARENT_PATH_QUALITY = "/servicequality";
     String PARENT_PATH_SP_API_RELATION = "/spAPIRelation";
     String PARENT_PATH_API = "/api";
     String PARENT_PATH_API_RESOURCE = "/apiresource";
@@ -38,9 +38,15 @@ public interface InterfaceConstrants {
     String PATH_SP_API_RELATION_GET = PARENT_PATH_SP_API_RELATION + "/" + PATH_VAR_NAME_SERVICE_PLAN_ID
         + "/{servicePlanId}";
 
-    String PATH_SERVICE_PLAN_QUALITY_INFO = PARENT_PATH_SERVICE_PLAN_QUALITY + "/{servicePlanId}";
-    String PATH_SERVICE_PLAN_QUALITY_INFO_SAVE = PARENT_PATH_SERVICE_PLAN_QUALITY + OPERATION_SAVE;
-    String PATH_SERVICE_PLAN_QUALITY_INFO_UPDATE = PARENT_PATH_SERVICE_PLAN_QUALITY + OPERATION_UPDATE;
+
+    //servicequality
+    String PATH_QUALITY_INFO = PARENT_PATH_QUALITY + "/{qualityId}";
+    String PATH_QUALITY_INFO_DELETE = PARENT_PATH_QUALITY + OPERATION_TYPE_DELETE + "/{qualityId}";
+    String PATH_QUALITY_INFO_SAVE = PARENT_PATH_QUALITY + OPERATION_SAVE;
+    String PATH_QUALITY_INFOS = PARENT_PATH_QUALITY + "/all";
+    String PATH_QUALITY_INFO_UPDATE = PARENT_PATH_QUALITY + OPERATION_UPDATE;
+
+
 
     //api
     String PATH_API_INFO = PARENT_PATH_API + "/{apiId}";
@@ -48,7 +54,6 @@ public interface InterfaceConstrants {
     String PATH_API_INFO_SAVE = PARENT_PATH_API + OPERATION_SAVE;
     String PATH_API_INFOS = PARENT_PATH_API + "/all";
     String PATH_API_INFO_UPDATE = PARENT_PATH_API + OPERATION_UPDATE;
-    String PATH_API_BY_SYSTEM_GET = PARENT_PATH_API + "/" + PATH_VAR_NAME_APP_SYS_ID + "/{appSysId}";
 
     //api sso
     String PATH_API_INFO_SAVE_SSO = PARENT_PATH_API_SSO + OPERATION_SAVE;

@@ -36,6 +36,16 @@ public class ApiBaseVO {
 
   private Date updateTime;
 
+  private String serviceQualityId;
+
+  public String getServiceQualityId() {
+    return serviceQualityId;
+  }
+
+  public void setServiceQualityId(String serviceQualityId) {
+    this.serviceQualityId = serviceQualityId;
+  }
+
   private ApiResourceVO apiResourceVO;
 
   public String getApiId() {

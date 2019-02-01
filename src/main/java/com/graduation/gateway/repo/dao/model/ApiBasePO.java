@@ -65,7 +65,8 @@ public class ApiBasePO extends GatewayPO {
   @Column(name = "state_id")
   protected String stateId;
 
-
+  @Column(name = "serviceQualityId")
+  private String serviceQualityId;
 
   public String getApiId() {
     return apiId;

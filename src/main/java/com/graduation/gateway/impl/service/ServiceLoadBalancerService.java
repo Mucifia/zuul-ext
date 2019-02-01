@@ -21,4 +21,5 @@ public class ServiceLoadBalancerService {
   public ServiceLoadBalancerVO getServiceLoadBalancerByServiceQualityId(String serviceQualityId){
     return BeanTransformer.convert(serviceLoadBalancerRepository.findServiceLoadBalancerPOByServiceQualityId(serviceQualityId),ServiceLoadBalancerVO.class);
   }
+
 }

@@ -44,7 +44,6 @@ public class RedisTest {
     routeVO.setTargetServiceId("adsad");
     redisTemplateUtil.getRouteRedisTemplate().opsForHash().put("routeTest","1",routeVO);
     ServiceQualityVO serviceQualityVO = new ServiceQualityVO();
-    serviceQualityVO.setRouteId("SArsarsa");
     redisTemplateUtil.getSqRedisTemplate().opsForHash().put("serviceQTest","1",serviceQualityVO);
 
 

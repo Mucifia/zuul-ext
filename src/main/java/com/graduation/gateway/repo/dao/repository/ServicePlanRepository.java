@@ -15,4 +15,5 @@ public interface ServicePlanRepository extends JpaRepository<ServicePlanPO,Strin
 
   public ServicePlanPO findServicePlanPOByServicePlanIdAndStatusEquals(String servicePlanId,String status);
 
+  public List<ServicePlanPO> findServicePlanPOSByServiceQualityId(String qualityId);
 }

@@ -15,4 +15,6 @@ public interface ApiBaseRepository extends JpaRepository<ApiBasePO,String>{
 
   public List<ApiBasePO> findAllByDelFlagIsFalse();
 
+  public List<ApiBasePO> findApiBasePOSByServiceQualityId(String qualityId);
+
 }

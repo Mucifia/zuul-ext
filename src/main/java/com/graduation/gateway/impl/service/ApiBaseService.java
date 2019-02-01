@@ -176,6 +176,12 @@ public class ApiBaseService {
   }
 
   public ApiBaseVO getApiBaseByApiId(String apiId) {
-    return BeanTransformer.convert(apiBaseRepository.findOne(apiId),ApiBaseVO.class);
+    return BeanTransformer.convert(apiBaseRepository.findOne(apiId), ApiBaseVO.class);
+  }
+
+  public List<ApiBaseVO> getApiBaseByQualityId(String qualityId) {
+    return apiBaseRepository.findApiBasePOSByServiceQualityId(qualityId).stream().map(apiBasePO -> {
+      return BeanTransformer.convert(apiBasePO,ApiBaseVO.class);
+    }).collect(Collectors.toList());
   }
 }

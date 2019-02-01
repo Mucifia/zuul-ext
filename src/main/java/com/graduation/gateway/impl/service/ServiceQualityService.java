@@ -1,5 +1,6 @@
 package com.graduation.gateway.impl.service;
 
+import com.graduation.gateway.api.model.ServicePlanVO;
 import com.graduation.gateway.api.model.ServiceQualityVO;
 import com.graduation.gateway.impl.utils.BeanTransformer;
 import com.graduation.gateway.impl.utils.GatewayImplConstants;
@@ -99,6 +100,11 @@ public class ServiceQualityService {
     serviceQualityPO.setDelFlag(GatewayImplConstants.DELETE_FLAG_TRUE);
     serviceQualityRepository.save(serviceQualityPO);
   }
+  public void deleteById(String qualityId){
+    ServiceQualityPO serviceQualityPO = serviceQualityRepository.findOne(qualityId);
+    serviceQualityPO.setDelFlag(GatewayImplConstants.DELETE_FLAG_TRUE);
+    serviceQualityRepository.save(serviceQualityPO);
+  }
 
   public Policy getRateLimitPolicyByServicePlanId(String servicePlanId){
     ServiceQualityVO serviceQualityVO = this.getServiceQualityByPlanId(servicePlanId);
@@ -140,5 +146,15 @@ public class ServiceQualityService {
 
   public ServiceQualityVO getServiceQualityByRouteId(String routeId){
     return BeanTransformer.convert(serviceQualityRepository.findServiceQualityPOByRouteId(routeId),ServiceQualityVO.class);
+  }
+  public ServiceQualityVO getServiceQualityByQualityId(String qualityId){
+    return BeanTransformer.convert(serviceQualityRepository.findOne(qualityId),ServiceQualityVO.class);
+
+  }
+
+  public List<ServiceQualityVO> getAllServiceQuality(){
+    return serviceQualityRepository.findAllByDelFlagIsFalse().stream().map(serviceQualityPO -> {
+      return BeanTransformer.convert(serviceQualityPO, ServiceQualityVO.class);
+    }).collect(Collectors.toList());
   }
 }

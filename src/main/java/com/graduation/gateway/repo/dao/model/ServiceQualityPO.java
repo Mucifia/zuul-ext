@@ -23,6 +23,16 @@ public class ServiceQualityPO extends GatewayPO{
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   protected String serviceQualityId;
 
+  @Column(name = "name")
+  protected String name ;
+
+  @Column(name = "version")
+  protected String version;
+
+  @Column(name = "description")
+  protected String description;
+
+
   @Column(name = "request_limit")
   protected String requestLimit;
 
@@ -166,6 +176,30 @@ public class ServiceQualityPO extends GatewayPO{
     this.routeId = routeId;
   }
 
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getVersion() {
+    return version;
+  }
+
+  public void setVersion(String version) {
+    this.version = version;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -174,11 +208,17 @@ public class ServiceQualityPO extends GatewayPO{
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
+    if (!super.equals(o)) {
+      return false;
+    }
     ServiceQualityPO that = (ServiceQualityPO) o;
     return requestTimeout == that.requestTimeout &&
         cbEnable == that.cbEnable &&
         cbRecoverTime == that.cbRecoverTime &&
         Objects.equals(serviceQualityId, that.serviceQualityId) &&
+        Objects.equals(name, that.name) &&
+        Objects.equals(version, that.version) &&
+        Objects.equals(description, that.description) &&
         Objects.equals(requestLimit, that.requestLimit) &&
         Objects.equals(maxConcurrency, that.maxConcurrency) &&
         Objects.equals(cbErrorPercentage, that.cbErrorPercentage) &&
@@ -192,11 +232,11 @@ public class ServiceQualityPO extends GatewayPO{
 
   @Override
   public int hashCode() {
-
     return Objects
-        .hash(serviceQualityId, requestLimit, requestTimeout, maxConcurrency, cbEnable,
-            cbRecoverTime,
-            cbErrorPercentage, cbRequestVolumeThreshold, requestLimitQuota,
-            requestLimitType, refreshInterval, servicePlanId, routeId);
+        .hash(super.hashCode(), serviceQualityId, name, version, description, requestLimit,
+            requestTimeout, maxConcurrency, cbEnable, cbRecoverTime, cbErrorPercentage,
+            cbRequestVolumeThreshold, requestLimitQuota, requestLimitType, refreshInterval,
+            servicePlanId,
+            routeId);
   }
 }

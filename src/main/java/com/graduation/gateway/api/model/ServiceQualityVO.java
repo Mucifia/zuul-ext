@@ -1,12 +1,7 @@
 package com.graduation.gateway.api.model;
 
+import java.util.List;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * @author: mmy
@@ -14,6 +9,12 @@ import org.hibernate.annotations.GenericGenerator;
  * @description:
  */
 public class ServiceQualityVO {
+
+  private String name;
+
+  private String version;
+
+  private String description;
 
   private String serviceQualityId;
 
@@ -37,9 +38,15 @@ public class ServiceQualityVO {
 
   private String refreshInterval;
 
-  private String servicePlanId;
+  private List<ApiBaseVO> apiBaseVOS;
 
-  private String routeId;
+  private List<ServicePlanVO> servicePlanVOS;
+
+  private String key;
+
+  private int apibindNo;
+
+  private int servicePlanNo;
 
 
   public String getServiceQualityId() {
@@ -131,20 +138,69 @@ public class ServiceQualityVO {
     this.refreshInterval = refreshInterval;
   }
 
-  public String getServicePlanId() {
-    return servicePlanId;
+  public List<ApiBaseVO> getApiBaseVOS() {
+    return apiBaseVOS;
   }
 
-  public void setServicePlanId(String servicePlanId) {
-    this.servicePlanId = servicePlanId;
+  public void setApiBaseVOS(List<ApiBaseVO> apiBaseVOS) {
+    this.apiBaseVOS = apiBaseVOS;
   }
 
-  public String getRouteId() {
-    return routeId;
+  public List<ServicePlanVO> getServicePlanVOS() {
+    return servicePlanVOS;
   }
 
-  public void setRouteId(String routeId) {
-    this.routeId = routeId;
+  public void setServicePlanVOS(
+      List<ServicePlanVO> servicePlanVOS) {
+    this.servicePlanVOS = servicePlanVOS;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getVersion() {
+    return version;
+  }
+
+  public void setVersion(String version) {
+    this.version = version;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public String getKey() {
+    return key;
+  }
+
+  public void setKey(String key) {
+    this.key = key;
+  }
+
+  public int getApibindNo() {
+    return apibindNo;
+  }
+
+  public void setApibindNo(int apibindNo) {
+    this.apibindNo = apibindNo;
+  }
+
+  public int getServicePlanNo() {
+    return servicePlanNo;
+  }
+
+  public void setServicePlanNo(int servicePlanNo) {
+    this.servicePlanNo = servicePlanNo;
   }
 
   @Override
@@ -159,6 +215,9 @@ public class ServiceQualityVO {
     return requestTimeout == that.requestTimeout &&
         cbEnable == that.cbEnable &&
         cbRecoverTime == that.cbRecoverTime &&
+        Objects.equals(name, that.name) &&
+        Objects.equals(version, that.version) &&
+        Objects.equals(description, that.description) &&
         Objects.equals(serviceQualityId, that.serviceQualityId) &&
         Objects.equals(requestLimit, that.requestLimit) &&
         Objects.equals(maxConcurrency, that.maxConcurrency) &&
@@ -167,23 +226,24 @@ public class ServiceQualityVO {
         Objects.equals(requestLimitQuota, that.requestLimitQuota) &&
         Objects.equals(requestLimitType, that.requestLimitType) &&
         Objects.equals(refreshInterval, that.refreshInterval) &&
-        Objects.equals(servicePlanId, that.servicePlanId) &&
-        Objects.equals(routeId, that.routeId);
+        Objects.equals(apiBaseVOS, that.apiBaseVOS) &&
+        Objects.equals(servicePlanVOS, that.servicePlanVOS);
   }
 
   @Override
   public int hashCode() {
-    return Objects
-        .hash(serviceQualityId, requestLimit, requestTimeout, maxConcurrency, cbEnable,
-            cbRecoverTime,
-            cbErrorPercentage, cbRequestVolumeThreshold,  requestLimitQuota,
-            requestLimitType, refreshInterval, servicePlanId, routeId);
+    return Objects.hash(name, version, description, serviceQualityId, requestLimit, requestTimeout,
+        maxConcurrency, cbEnable, cbRecoverTime, cbErrorPercentage, cbRequestVolumeThreshold,
+        requestLimitQuota, requestLimitType, refreshInterval, apiBaseVOS, servicePlanVOS);
   }
 
   @Override
   public String toString() {
     return "ServiceQualityVO{" +
-        "serviceQualityId='" + serviceQualityId + '\'' +
+        "name='" + name + '\'' +
+        ", version='" + version + '\'' +
+        ", description='" + description + '\'' +
+        ", serviceQualityId='" + serviceQualityId + '\'' +
         ", requestLimit='" + requestLimit + '\'' +
         ", requestTimeout=" + requestTimeout +
         ", maxConcurrency='" + maxConcurrency + '\'' +
@@ -194,8 +254,8 @@ public class ServiceQualityVO {
         ", requestLimitQuota='" + requestLimitQuota + '\'' +
         ", requestLimitType='" + requestLimitType + '\'' +
         ", refreshInterval='" + refreshInterval + '\'' +
-        ", servicePlanId='" + servicePlanId + '\'' +
-        ", routeId='" + routeId + '\'' +
+        ", apiBaseVOS=" + apiBaseVOS +
+        ", servicePlanVOS=" + servicePlanVOS +
         '}';
   }
 }

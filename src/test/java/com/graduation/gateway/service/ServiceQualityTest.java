@@ -38,15 +38,11 @@ public class ServiceQualityTest {
 
     for (int i =0;i<50;i++){
       ServiceQualityVO serviceQualityVO = new ServiceQualityVO();
-      serviceQualityVO.setServicePlanId(String.format("%s%d","test-case",i));
-      serviceQualityVO.setRouteId("test-case");
       serviceQualityService.save(serviceQualityVO);
     }
 
     for (int i =0;i<50;i++){
       ServiceQualityVO serviceQualityVO = new ServiceQualityVO();
-      serviceQualityVO.setServicePlanId(String.format("%s%d","test-case",i));
-      serviceQualityVO.setRouteId(String.format("%s%d","test-case",i));
       serviceQualityService.save(serviceQualityVO);
     }
 
