@@ -2,6 +2,7 @@ package com.graduation.gateway.api.model;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Column;
@@ -20,43 +21,46 @@ import org.springframework.format.annotation.DateTimeFormat;
  */
 public class ServicePlanVO{
 
-  protected String servicePlanId;
+  private String servicePlanId;
 
-  protected String name;
+  private String name;
 
-  protected String version;
+  private String version;
 
-  protected String description;
+  private String description;
 
-  protected String status;
+  private String status;
 
-  protected String serviceQualityId;
+  private String serviceQualityId;
 
-  protected boolean NeedReview;
+  private boolean NeedReview;
 
-  protected String security;
+  private String security;
 
-  protected String imgSrc;
+  private String imgSrc;
 
-  protected boolean enable;
+  private boolean enable;
 
-  protected String commitBy;
+  private String commitBy;
 
-  protected Date commitTime;
+  private Date commitTime;
 
-  protected String stateId;
+  private String stateId;
 
-  protected String authType;
+  private String authType;
 
-  protected Set<ApiBaseVO> apiBaseVOSet = new HashSet<>();
+  private String key;
 
-  public Set<ApiBaseVO> getApiBaseVOSet() {
-    return apiBaseVOSet;
+  private List<ApiBaseVO> apiBaseVOS;
+
+  public List<ApiBaseVO> getApiBaseVOS() {
+    return apiBaseVOS;
   }
 
-  public void setApiBaseVOSet(Set<ApiBaseVO> apiBaseVOSet) {
-    this.apiBaseVOSet = apiBaseVOSet;
+  public void setApiBaseVOS(List<ApiBaseVO> apiBaseVOS) {
+    this.apiBaseVOS = apiBaseVOS;
   }
+
 
   public String getServicePlanId() {
     return servicePlanId;
@@ -170,6 +174,14 @@ public class ServicePlanVO{
     this.authType = authType;
   }
 
+  public String getKey() {
+    return key;
+  }
+
+  public void setKey(String key) {
+    this.key = key;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -193,15 +205,15 @@ public class ServicePlanVO{
         Objects.equals(commitTime, that.commitTime) &&
         Objects.equals(stateId, that.stateId) &&
         Objects.equals(authType, that.authType) &&
-        Objects.equals(apiBaseVOSet, that.apiBaseVOSet);
+        Objects.equals(key, that.key) &&
+        Objects.equals(apiBaseVOS, that.apiBaseVOS);
   }
 
   @Override
   public int hashCode() {
     return Objects
-        .hash(servicePlanId, name, version, description, status, serviceQualityId,
-            NeedReview, security, imgSrc, enable, commitBy, commitTime, stateId, authType,
-            apiBaseVOSet);
+        .hash(servicePlanId, name, version, description, status, serviceQualityId, NeedReview,
+            security, imgSrc, enable, commitBy, commitTime, stateId, authType, key, apiBaseVOS);
   }
 
   @Override
@@ -221,7 +233,8 @@ public class ServicePlanVO{
         ", commitTime=" + commitTime +
         ", stateId='" + stateId + '\'' +
         ", authType='" + authType + '\'' +
-        ", apiBaseVOSet=" + apiBaseVOSet +
+        ", key='" + key + '\'' +
+        ", apiBaseVOS=" + apiBaseVOS +
         '}';
   }
 }

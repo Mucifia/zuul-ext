@@ -14,9 +14,9 @@ public interface ServicePlanApiRelationRepository extends JpaRepository<ServiceP
 
   List<ServicePlanApiRelationPO> findAllByApiId(String string);
 
-  List<ServicePlanApiRelationPO> findAllByServiceId(String string);
+  List<ServicePlanApiRelationPO> findAllByServiceplanId(String serviceplanId);
 
-  List<ServicePlanApiRelationPO> findAllByServiceId(String string, Pageable pageable);
+  List<ServicePlanApiRelationPO> findAllByServiceplanId(String serviceplanId, Pageable pageable);
 
-
+  ServicePlanApiRelationPO findServicePlanApiRelationPOByServiceplanIdAndApiId(String serviceplanId,String apiId);
 }

@@ -26,9 +26,7 @@ public class ServicePlanService {
   ServicePlanRepository servicePlanRepository;
 
   public void updateDelFlagById(String servicePlanId) {
-    ServicePlanPO servicePlanPO = servicePlanRepository
-        .findServicePlanPOByServicePlanIdAndStatusEquals(servicePlanId,
-            GatewayImplConstants.STATUS_DRAFT);
+    ServicePlanPO servicePlanPO = servicePlanRepository.findOne(servicePlanId);
     servicePlanPO.setDelFlag(GatewayImplConstants.DELETE_FLAG_TRUE);
     servicePlanRepository.save(servicePlanPO);
   }
@@ -60,9 +58,9 @@ public class ServicePlanService {
     return BeanTransformer.convert(servicePlanPO, ServicePlanVO.class);
   }
 
-  public void save(ServicePlanVO servicePlanVO) {
+  public ServicePlanPO save(ServicePlanVO servicePlanVO) {
     ServicePlanPO servicePlanPO = BeanTransformer.convert(servicePlanVO, ServicePlanPO.class);
-    servicePlanRepository.save(servicePlanPO);
+    return servicePlanRepository.save(servicePlanPO);
   }
 
   public void save(List<ServicePlanVO> servicePlanVOS) {
@@ -78,6 +76,11 @@ public class ServicePlanService {
     }).collect(Collectors.toList());
   }
 
+  public List<ServicePlanVO> getAllServicePlans(){
+    return servicePlanRepository.findALlByDelFlagIsFalse().stream().map(servicePlanPO -> {
+     return BeanTransformer.convert(servicePlanPO,ServicePlanVO.class);
+    }).collect(Collectors.toList());
+  }
 
 
 }

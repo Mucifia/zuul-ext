@@ -38,6 +38,8 @@ public class ApiBaseVO {
 
   private String serviceQualityId;
 
+  private ApiResourceVO apiResourceVO;
+
   public String getServiceQualityId() {
     return serviceQualityId;
   }
@@ -45,9 +47,6 @@ public class ApiBaseVO {
   public void setServiceQualityId(String serviceQualityId) {
     this.serviceQualityId = serviceQualityId;
   }
-
-  private ApiResourceVO apiResourceVO;
-
   public String getApiId() {
     return apiId;
   }

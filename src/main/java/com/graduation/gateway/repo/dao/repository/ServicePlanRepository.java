@@ -13,7 +13,8 @@ public interface ServicePlanRepository extends JpaRepository<ServicePlanPO,Strin
 
   public ServicePlanPO findServicePlanPOByName(String name);
 
-  public ServicePlanPO findServicePlanPOByServicePlanIdAndStatusEquals(String servicePlanId,String status);
-
   public List<ServicePlanPO> findServicePlanPOSByServiceQualityId(String qualityId);
+
+  public List<ServicePlanPO> findALlByDelFlagIsFalse();
+
 }

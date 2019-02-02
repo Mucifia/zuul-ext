@@ -17,16 +17,6 @@ import org.hibernate.annotations.GenericGenerator;
 @Table(name = "zuul_service_lan_api_realation")
 public class ServicePlanApiRelationPO extends GatewayPO{
 
-
-  public ServicePlanApiRelationPO(){
-
-  }
-  public ServicePlanApiRelationPO(String apiId,String serviceId){
-    this.apiId=apiId;
-    this.serviceId=serviceId;
-  }
-
-
   @Id
   @Column(name = "serviceplan_relation_id")
   @GeneratedValue(generator = "uuid")
@@ -37,7 +27,9 @@ public class ServicePlanApiRelationPO extends GatewayPO{
   protected String apiId;
 
   @Column(name = "service_plan_id")
-  protected String serviceId;
+  protected String serviceplanId;
+
+
 
   public String getServicePlanRelationId() {
     return servicePlanRelationId;
@@ -55,12 +47,12 @@ public class ServicePlanApiRelationPO extends GatewayPO{
     this.apiId = apiId;
   }
 
-  public String getServiceId() {
-    return serviceId;
+  public String getServiceplanId() {
+    return serviceplanId;
   }
 
-  public void setServiceId(String serviceId) {
-    this.serviceId = serviceId;
+  public void setServiceplanId(String serviceplanId) {
+    this.serviceplanId = serviceplanId;
   }
 
   @Override
@@ -77,11 +69,11 @@ public class ServicePlanApiRelationPO extends GatewayPO{
     ServicePlanApiRelationPO that = (ServicePlanApiRelationPO) o;
     return Objects.equals(servicePlanRelationId, that.servicePlanRelationId) &&
         Objects.equals(apiId, that.apiId) &&
-        Objects.equals(serviceId, that.serviceId);
+        Objects.equals(serviceplanId, that.serviceplanId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), servicePlanRelationId, apiId, serviceId);
+    return Objects.hash(super.hashCode(), servicePlanRelationId, apiId, serviceplanId);
   }
 }

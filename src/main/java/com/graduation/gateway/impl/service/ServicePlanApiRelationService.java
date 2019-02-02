@@ -23,7 +23,7 @@ public class ServicePlanApiRelationService {
 
   public List<String> getApiIdsByServiceId(String serviceId) {
     List<ServicePlanApiRelationPO> servicePlanApiRelationPOS = servicePlanApiRelationRepository
-        .findAllByServiceId(serviceId);
+        .findAllByServiceplanId(serviceId);
     List<String> apiIds = servicePlanApiRelationPOS.stream().map(s -> {
       return s.getApiId();
     }).collect(Collectors.toList());
@@ -32,7 +32,7 @@ public class ServicePlanApiRelationService {
 
   public List<String> getApiIdsByServiceId(String serviceId, int pageIndex, int pagesize) {
     Pageable pageable = new PageRequest(pageIndex, pagesize);
-    return servicePlanApiRelationRepository.findAllByServiceId(serviceId, pageable).stream()
+    return servicePlanApiRelationRepository.findAllByServiceplanId(serviceId, pageable).stream()
         .map(s -> {
           return s.getApiId();
         }).collect(Collectors.toList());
@@ -54,7 +54,15 @@ public class ServicePlanApiRelationService {
     servicePlanApiRelationRepository.delete(servicePlanApiRelationRepository.findAllByApiId(apiId));
   }
 
+  public void deleteByServiceplanId(String serviceplanId) {
+    servicePlanApiRelationRepository.delete(servicePlanApiRelationRepository.findAllByServiceplanId(serviceplanId));
+  }
+
   public List<ServicePlanApiRelationPO> findOneByApiId(String apiId) {
     return  servicePlanApiRelationRepository.findAllByApiId(apiId);
+  }
+
+  public ServicePlanApiRelationPO findByServicePlanIdandApiId(String servicePlanId,String apiId){
+    return servicePlanApiRelationRepository.findServicePlanApiRelationPOByServiceplanIdAndApiId(servicePlanId,apiId);
   }
 }

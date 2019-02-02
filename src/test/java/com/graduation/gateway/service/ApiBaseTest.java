@@ -98,9 +98,9 @@ public class ApiBaseTest {
       apiBaseVO.setVersion("1");
       apiBaseVO.setName(String.format("%s%d", "test-case", i));
       apiBaseService.save(apiBaseVO);
-      servicePlanApiRelationService.save(
-          new ServicePlanApiRelationPO(apiBaseService.findByName(apiBaseVO.getName()).getApiId(),
-              servicePlanService.getByName("test-case").getServicePlanId()));
+//      servicePlanApiRelationService.save(
+//          new ServicePlanApiRelationPO(apiBaseService.findByName(apiBaseVO.getName()).getApiId(),
+//              servicePlanService.getByName("test-case").getServicePlanId()));
     }
   }
 
